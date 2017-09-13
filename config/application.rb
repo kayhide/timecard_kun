@@ -10,7 +10,9 @@ module TimecardKun
   class Application < Rails::Application
     config.load_defaults 5.1
 
-    config.generators.template_engine = :slim
+    config.time_zone = 'Tokyo'
+    config.i18n.default_locale = :ja
+    config.i18n.available_locales = [:ja]
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers

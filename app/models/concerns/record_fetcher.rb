@@ -2,8 +2,8 @@ module RecordFetcher
   extend ActiveSupport::Concern
 
   module ClassMethods
-    def get month
-      request(detail_params(month)).map do |row|
+    def get_monthly_details start_date
+      request(detail_params(start_date)).map do |row|
         Record.new(
           id: row[0],
           name: row[1],
@@ -36,7 +36,15 @@ module RecordFetcher
       end
     end
 
-    def detail_params month = nil
+    def detail_params start
+      {
+        staff: '%%',
+        start: start.strftime('%Y/%m/%d'),
+        end: (start + 1.month - 1.second).strftime('%Y-%m-%d %H:%M:%S')
+      }
+    end
+
+    def adjusted_start_date month = nil
       today = Date.today
       start = Date.new today.year, (month || today.month), closing_day
       if start.future?
@@ -46,12 +54,7 @@ module RecordFetcher
           start = start - 1.year
         end
       end
-
-      {
-        staff: '%%',
-        start: start.strftime('%Y/%m/%d'),
-        end: (start + 1.month - 1.second).strftime('%Y-%m-%d %H:%M:%S')
-      }
+      start
     end
   end
 end

@@ -23,6 +23,7 @@ guard 'livereload' do
     js: :js,
     coffee: :js,
     html: :html,
+    slim: :html,
     png: :png,
     gif: :gif,
     jpg: :jpg,

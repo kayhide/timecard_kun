@@ -1,14 +1,18 @@
-h1 Listing records
+h2
+  | 出勤簿
+  span.small=l @start_date
+  span.small 〜
+  span.small=l @start_date + 1.month - 1.day
 
-table
+table.table
   thead
     tr
       th ID
-      th Name
-      th Started at
-      th Ended at
-      th Regular span
-      th Early span
+      th 名前
+      th 出社時刻
+      th 退社時刻
+      th 勤務時間
+      th 早朝時間
 
   tbody
     - @records.each do |record|
