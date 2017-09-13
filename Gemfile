@@ -18,11 +18,19 @@ gem 'slim-rails'
 gem 'mechanize'
 
 gem 'dotenv-rails'
+gem 'pry-rails'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
+  gem 'pry-doc'
+  gem 'pry-byebug'
+  gem 'pry-stack_explorer'
+
+  gem 'guard'
+  gem 'guard-livereload', require: false
+  gem 'rack-livereload'
 end
 
 group :development do
