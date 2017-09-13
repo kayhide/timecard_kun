@@ -1,25 +1,30 @@
-h2
+h2.hidden-print
   | 出勤簿
   span.small=l @start_date
   span.small 〜
   span.small=l @start_date + 1.month - 1.day
 
-table.table
-  thead
-    tr
-      th ID
-      th 名前
-      th 出社時刻
-      th 退社時刻
-      th 勤務時間
-      th 早朝時間
+- @records.group_by(&:id).each do |id, records|
+  .page
+    h2.visible-print-block
+      | 出勤簿
+      span.small=l @start_date
+      span.small 〜
+      span.small=l @start_date + 1.month - 1.day
 
-  tbody
-    - @records.each do |record|
-      tr
-        td = record.id
-        td = record.name
-        td = record.started_at
-        td = record.ended_at
-        td = record.regular_span
-        td = record.early_span
+    .panel.panel-default
+      .panel-heading= records.first.name
+      table.table
+        thead
+          tr
+            th 出社時刻
+            th 退社時刻
+            th 勤務時間
+            th 早朝時間
+        tbody
+          - records.each do |record|
+            tr
+              td= record.started_at
+              td= record.ended_at
+              td= record.regular_span
+              td= record.early_span
