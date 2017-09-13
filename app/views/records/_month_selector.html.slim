@@ -1,0 +1,15 @@
+- start_date = Date.new(2017, 8)
+- end_date = Date.today
+
+p
+  - months(start_date, end_date).group_by(&:year).reverse_each do |year, dates|
+    .form-inline
+      label>= year
+      .btn-group
+        - (1...dates.first.month).each do |month|
+          = link_to month, [:root, { year: year, month: month} ], class: %w(btn btn-default disabled)
+        - dates.map(&:month).each do |month|
+          - if active_date.year == year && active_date.month == month
+            = link_to month, [:root, { year: year, month: month} ], class: %w(btn btn-default active)
+          - else
+            = link_to month, [:root, { year: year, month: month} ], class: %w(btn btn-default)

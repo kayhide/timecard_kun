@@ -1,8 +1,11 @@
-h2.hidden-print
-  | 出勤簿
-  span.small=l @start_date
-  span.small 〜
-  span.small=l @start_date + 1.month - 1.day
+.hidden-print
+  h2
+    | 出勤簿
+    span.small=l @start_date
+    span.small 〜
+    span.small=l @start_date + 1.month - 1.day
+
+  = render 'month_selector', active_date: @start_date
 
 - @records.group_by(&:id).each do |id, records|
   .page

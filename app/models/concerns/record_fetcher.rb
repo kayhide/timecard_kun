@@ -44,15 +44,11 @@ module RecordFetcher
       }
     end
 
-    def adjusted_start_date month = nil
+    def adjusted_start_date year, month
       today = Date.today
-      start = Date.new today.year, (month || today.month), closing_day
-      if start.future?
-        if start.month == today.month
-          start = start - 1.month
-        else
-          start = start - 1.year
-        end
+      start = Date.new (year || today.year), (month || today.month), closing_day
+      if year.nil? && month.nil? && start.future?
+        start = start - 1.month
       end
       start
     end
