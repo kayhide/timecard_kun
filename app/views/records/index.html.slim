@@ -16,7 +16,11 @@
       span.small=l @start_date + 1.month - 1.day
 
     .panel.panel-default
-      .panel-heading= records.first.name
+      .panel-heading
+        .hidden-print
+          = link_to records.first.name, [:new, :records, { user_id: id, user_name: records.first.name }]
+        .visible-print.inline
+          = records.first.name
       table.table
         thead
           tr

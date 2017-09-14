@@ -11,5 +11,7 @@ html
   body
     nav.navbar.navbar-fixed-top.navbar-inverse
       a.navbar-brand href=url_for(:root) =t 'header.site_title'
+      - if user_name
+        p.navbar-text.pull-right= user_name
     .container
       = yield

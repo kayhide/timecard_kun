@@ -1,0 +1,12 @@
+.hidden-print
+  h2
+    | タイムカード
+    span
+
+.row
+  .col-md-12
+    = form_with url: [:open, :records], local: true, html: { class: %w(form) } do |form|
+      = form.submit '出社', class: %w(btn btn-success btn-lg btn-block)
+
+    = form_with url: [:close, :records], local: true, html: { class: %w(form) } do |form|
+      = form.submit '退社', class: %w(btn btn-warning btn-lg btn-block)

@@ -1,6 +1,10 @@
 module RecordFetcher
   extend ActiveSupport::Concern
 
+  included do
+    include RecordBase
+  end
+
   module ClassMethods
     def get_monthly_details start_date
       request(detail_params(start_date)).map do |row|
@@ -15,22 +19,10 @@ module RecordFetcher
       end
     end
 
-    def base_url
-      'http://skylon.jp/timecard/timeline.php'
-    end
-
-    def basic_authentication
-      [ENV['RECORD_FETCHER_USERNAME'], ENV['RECORD_FETCHER_PASSWORD']]
-    end
-
-    def closing_day
-      20
-    end
-
     def request params
       agent = Mechanize.new
       agent.basic_auth(*basic_authentication)
-      agent.get(base_url, params)
+      agent.get(URI.join(base_url, 'timeline.php'), params)
       agent.page.css('tr').drop(1).map do |tr|
         data = tr.css('td').map(&:text)
       end
