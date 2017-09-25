@@ -54,6 +54,7 @@ ja:
     - :day
   time:
     formats:
+      date_only: ! '%Y/%m/%d'
       time_only: ! '%H:%M:%S'
   datetime:
     distance_in_words:

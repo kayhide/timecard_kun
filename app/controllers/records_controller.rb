@@ -1,14 +1,5 @@
 class RecordsController < ApplicationController
   before_action :set_user, only: [:start, :finish]
-  before_action :keep_user_info, only: [:new]
-
-  # GET /records
-  def index
-    year = params[:year].try(&:to_i)
-    month = params[:month].try(&:to_i)
-    @start_date = Record.adjusted_start_date(year, month)
-    @records = Record.get_monthly_details(@start_date)
-  end
 
   # POST /user/1/records/start
   def start

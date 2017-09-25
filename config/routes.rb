@@ -10,8 +10,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resource :records, only: [:new] do
-    post :open
-    post :close
+  namespace :admin do
+    resources :records, only: [:index]
   end
 end
