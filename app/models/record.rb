@@ -1,8 +1,11 @@
 class Record < ApplicationRecord
+  include RecordSpanCalculator
+
   belongs_to :user
 
   COUR_START_DAY = 21
   RECENT_SPAN = 24.hours
+  DEFAULT_STARTED_AT_OFFSET = 8.hours
 
   def self.cour_of time
     starts_on = Time.zone.local(time.year, time.month, COUR_START_DAY)
@@ -29,5 +32,10 @@ class Record < ApplicationRecord
 
   def unfinished?
     !finished_at?
+  end
+
+  def computed_started_at
+    started_at ||
+      (finished_at - DEFAULT_STARTED_AT_OFFSET).beginning_of_day + DEFAULT_STARTED_AT_OFFSET
   end
 end
