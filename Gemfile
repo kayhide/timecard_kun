@@ -14,7 +14,12 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
 
 gem 'slim-rails'
+gem 'kaminari'
+
 gem 'bootstrap-sass'
+gem 'font-awesome-rails'
+gem 'jquery-rails'
+gem 'rails-i18n'
 
 gem 'mechanize'
 

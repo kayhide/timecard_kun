@@ -1,21 +1,14 @@
-h1 Listing users
+- if @users.present?
+  = paginate @users
+  table.table.table-bordered.table-condensed.table-hover
+    caption= render 'layouts/paginate_info', items: @users
+    = render partial: 'users/user', collection: @users
+- else
+  .alert
+    p.text-muted=t 'messages.no_item', item: User.model_name.human
 
-table
-  thead
-    tr
-      th Name
-      th
-      th
-      th
-
-  tbody
-    - @users.each do |user|
-      tr
-        td = user.name
-        td = link_to 'Show', user
-        td = link_to 'Edit', edit_user_path(user)
-        td = link_to 'Destroy', user, data: { confirm: 'Are you sure?' }, method: :delete
-
-br
-
-= link_to 'New User', new_user_path
+ul.list-inline
+  li= link_to [:new, :user], class: %w(btn btn-success) do
+    i.fa.fa-plus>
+    = User.model_name.human
+.clearfix

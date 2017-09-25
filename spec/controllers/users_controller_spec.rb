@@ -57,7 +57,7 @@ RSpec.describe UsersController, type: :controller do
 
       it "redirects to the created user" do
         post :create, params: {user: valid_attributes}, session: valid_session
-        expect(response).to redirect_to(User.last)
+        expect(response).to redirect_to([:users])
       end
     end
 
@@ -84,10 +84,10 @@ RSpec.describe UsersController, type: :controller do
         expect(user.name).to eq 'Suzuki Ichiro'
       end
 
-      it "redirects to the user" do
+      it "redirects to the users list" do
         user = FactoryGirl.create(:user)
         put :update, params: {id: user.to_param, user: new_attributes}, session: valid_session
-        expect(response).to redirect_to(user)
+        expect(response).to redirect_to([:users])
       end
     end
 

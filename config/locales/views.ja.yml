@@ -1,3 +1,15 @@
 ja:
   header:
     site_title: タイムカードくん
+  helpers:
+    links:
+      back: "戻る"
+      cancel: "キャンセル"
+      confirm: "よろしいですか？"
+      destroy: "削除"
+      new: "新規作成"
+      edit: "編集"
+  messages:
+    no_item: '%{item}はありません。'
+    was_created: '%{item}が作成されました。'
+    was_updated: '%{item}が更新されました。'

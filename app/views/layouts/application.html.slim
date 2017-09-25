@@ -14,4 +14,5 @@ html
       - if user_name
         p.navbar-text.pull-right= user_name
     .container
+      #message= render 'layouts/message'
       = yield
