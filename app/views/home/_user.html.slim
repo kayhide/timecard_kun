@@ -1,0 +1,25 @@
+.col-md-3 id=dom_id(user)
+  .panel class="panel-#{record.try(:unfinished?) ? 'success' : 'default'}"
+    .panel-heading= user
+    .panel-body
+      - if record
+        - if record.unfinished?
+          | 出社中
+        - else
+          | 退社済
+      - else
+        | 未出社
+    table.table
+      tr
+        th.col-xs-4= Record.human_attribute_name :started_at
+        td.col-xs-6.text-right
+          = record&.started_at && l(record.started_at, format: :time_only)
+      tr
+        th.col-xs-4= Record.human_attribute_name :finished_at
+        td.col-xs-6.text-right
+          = record&.finished_at && l(record.finished_at, format: :time_only)
+    .btn-group.btn-group-justified
+        = link_to [:start, user, :records], method: :post, remote: true, class: %w(btn btn-lg btn-success) do
+          span.spacive 出社
+        = link_to [:finish, user, :records], method: :post, remote: true, class: %w(btn btn-lg btn-warning) do
+          span.spacive 退社

@@ -1,0 +1,3 @@
+.row
+  - @users.each do |user|
+    = render 'home/user', user: user, record: @records[user.id].to_a.last

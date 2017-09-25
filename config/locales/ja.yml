@@ -52,6 +52,9 @@ ja:
     - :year
     - :month
     - :day
+  time:
+    formats:
+      time_only: ! '%H:%M:%S'
   datetime:
     distance_in_words:
       about_x_hours:

@@ -1,7 +1,15 @@
 Rails.application.routes.draw do
-  root 'users#index'
+  root 'home#index'
 
-  resources :users
+  resources :users do
+    resources :records, only: [] do
+      collection do
+        post :start
+        post :finish
+      end
+    end
+  end
+
   resource :records, only: [:new] do
     post :open
     post :close

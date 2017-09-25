@@ -1,4 +1,5 @@
 class RecordsController < ApplicationController
+  before_action :set_user, only: [:start, :finish]
   before_action :keep_user_info, only: [:new]
 
   # GET /records
@@ -9,28 +10,23 @@ class RecordsController < ApplicationController
     @records = Record.get_monthly_details(@start_date)
   end
 
-  # GET /records/new
-  def new
-    unless user_id && user_name
-      redirect_to action: :index
-    end
+  # POST /user/1/records/start
+  def start
+    @record = @user.records.create(started_at: Time.current)
+    render :update
   end
 
-  # POST /records/open
-  def open
-    unless user_id
-      redirect_to action: :index
-    end
-    Record.open user_id
-    redirect_to action: :new
+  # POST /user/1/records/finish
+  def finish
+    @record = @user.records.unfinished.recent.first || @user.records.create
+    @record.finished_at = Time.current
+    @record.save
+    render :update
   end
 
-  # POST /records/close
-  def close
-    unless user_id
-      redirect_to action: :index
-    end
-    Record.close user_id
-    redirect_to action: :new
+  private
+
+  def set_user
+    @user = User.find(params[:user_id])
   end
 end

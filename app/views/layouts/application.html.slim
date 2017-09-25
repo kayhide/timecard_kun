@@ -11,8 +11,11 @@ html
   body
     nav.navbar.navbar-fixed-top.navbar-inverse
       a.navbar-brand href=url_for(:root) =t 'header.site_title'
-      - if user_name
-        p.navbar-text.pull-right= user_name
+      button.navbar-toggle.btn.btn-primary type="button" data-toggle="collapse" data-target=".navbar-collapse"
+        i.fa.fa-fw.fa-bars
+      .navbar-collapse.collapse
+        ul.nav.navbar-nav
+          li= link_to User.model_name.human, [:users]
     #breadcrumb= render 'layouts/breadcrumb'
     .container
       #message= render 'layouts/message'

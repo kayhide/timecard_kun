@@ -2,6 +2,7 @@ class Record < ApplicationRecord
   belongs_to :user
 
   COUR_START_DAY = 21
+  RECENT_SPAN = 24.hours
 
   def self.cour_of time
     starts_on = Time.zone.local(time.year, time.month, COUR_START_DAY)
@@ -19,4 +20,14 @@ class Record < ApplicationRecord
   scope :last_cour, ->() {
     cour(cour_of(Time.current - 1.month))
   }
+  scope :unfinished, ->() {
+    where(finished_at: nil)
+  }
+  scope :recent, ->() {
+    where(started_at: RECENT_SPAN.ago .. Float::INFINITY)
+  }
+
+  def unfinished?
+    !finished_at?
+  end
 end
