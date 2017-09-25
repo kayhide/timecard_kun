@@ -51,6 +51,10 @@ group :development do
   gem 'rails-footnotes'
 end
 
+group :test do
+  gem 'timecop'
+end
+
 group :production do
   gem 'rails_12factor'
 end
