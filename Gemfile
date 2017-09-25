@@ -18,7 +18,6 @@ gem 'bootstrap-sass'
 
 gem 'mechanize'
 
-gem 'dotenv-rails'
 gem 'pry-rails'
 
 group :development, :test do
@@ -28,17 +27,22 @@ group :development, :test do
   gem 'pry-doc'
   gem 'pry-byebug'
   gem 'pry-stack_explorer'
+  gem 'dotenv-rails'
+  gem 'factory_girl_rails'
 
+  gem 'listen', '>= 3.0.5', '< 3.2'
+  gem 'spring'
+  gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'spring-commands-rspec'
+  gem 'rspec-rails'
+  gem 'rack-livereload'
   gem 'guard'
   gem 'guard-livereload', require: false
-  gem 'rack-livereload'
+  gem 'guard-rspec'
 end
 
 group :development do
   gem 'web-console', '>= 3.3.0'
-  gem 'listen', '>= 3.0.5', '< 3.2'
-  gem 'spring'
-  gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
 group :production do
