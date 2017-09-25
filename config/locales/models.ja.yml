@@ -2,6 +2,7 @@ ja:
   activerecord:
     models:
       user: ユーザー
+      record: 勤務記録
     attributes:
       timestamps: &timestamps
         created_at: 作成日時
@@ -9,3 +10,9 @@ ja:
       user:
         <<: *timestamps
         name: 名前
+      record:
+        <<: *timestamps
+        started_at: 出社時刻
+        finished_at: 退社時刻
+        regular_span: 勤務時間
+        early_span: 早朝時間

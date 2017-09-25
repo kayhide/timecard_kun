@@ -1,3 +1,8 @@
+- content_for :breadcrumb do
+  ol.breadcrumb
+    li= link_to t('helpers.links.home'), :root
+    li.active= User.model_name.human
+
 - if @users.present?
   = paginate @users
   table.table.table-bordered.table-condensed.table-hover

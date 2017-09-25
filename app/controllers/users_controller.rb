@@ -8,6 +8,8 @@ class UsersController < ApplicationController
 
   # GET /users/1
   def show
+    @current_cour = Record.cour_of(Time.current)
+    @records = @user.records.cour(@current_cour).order(created_at: :desc)
   end
 
   # GET /users/new

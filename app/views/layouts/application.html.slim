@@ -13,6 +13,7 @@ html
       a.navbar-brand href=url_for(:root) =t 'header.site_title'
       - if user_name
         p.navbar-text.pull-right= user_name
+    #breadcrumb= render 'layouts/breadcrumb'
     .container
       #message= render 'layouts/message'
       = yield

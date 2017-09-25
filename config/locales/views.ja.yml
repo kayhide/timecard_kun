@@ -3,6 +3,7 @@ ja:
     site_title: タイムカードくん
   helpers:
     links:
+      home: "ホーム"
       back: "戻る"
       cancel: "キャンセル"
       confirm: "よろしいですか？"

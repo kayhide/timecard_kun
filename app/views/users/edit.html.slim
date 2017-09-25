@@ -1,2 +1,13 @@
-h2= User.model_name.human
-= render 'form'
+- content_for :breadcrumb do
+  ol.breadcrumb
+    li= link_to t('helpers.links.home'), :root
+    li= link_to User.model_name.human, :users
+    li.active= @user.name_was
+
+.row
+  .col-md-8
+    .panel.panel-default
+      .panel-heading
+        = User.model_name.human
+      .panel-body
+        = render 'form'
