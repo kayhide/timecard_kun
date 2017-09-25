@@ -22,7 +22,7 @@ module TimecardKun
 
     config.time_zone = 'Tokyo'
     config.i18n.default_locale = :ja
-    config.i18n.available_locales = [:ja]
+    config.i18n.available_locales = [:ja, :en]
 
     config.generators do |g|
       g.orm :active_record
