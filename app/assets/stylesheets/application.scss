@@ -16,6 +16,18 @@ h2 {
     margin-left: 2px;
 }
 
+.btn-remote.loading {
+    @extend .disabled;
+    position: relative;
+    &:after {
+        position: absolute;
+        right: 8px;
+        @extend .fa;
+        @extend .fa-spinner:before;
+        @extend .fa-pulse;
+    }
+}
+
 .spacive {
     letter-spacing: 1em;
     margin-right: -1em;

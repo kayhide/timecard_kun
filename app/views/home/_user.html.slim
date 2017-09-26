@@ -30,7 +30,7 @@ ruby:
         td.col-xs-6.text-right
           = record&.finished_at && l(record.finished_at, format: :time_only)
     .btn-group.btn-group-justified
-        = link_to [:start, user, :records], method: :post, remote: true, class: %w(btn btn-lg btn-success) do
+        = link_to [:start, user, :records], method: :post, remote: true, class: %w(btn btn-lg btn-success btn-remote) do
           span.spacive 出社
-        = link_to [:finish, user, :records], method: :post, remote: true, class: %w(btn btn-lg btn-warning) do
+        = link_to [:finish, user, :records], method: :post, remote: true, class: %w(btn btn-lg btn-warning btn-remote) do
           span.spacive 退社
