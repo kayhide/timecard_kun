@@ -1,14 +1,25 @@
-.col-md-3 id=dom_id(user)
-  .panel class="panel-#{record.try(:unfinished?) ? 'success' : 'default'}"
+ruby:
+  state = record ? (record.unfinished? ? :unfinished : :finished) : :unstarted
+  panel_class = case state
+    when :unstarted
+      'panel-default'
+    when :unfinished
+      'panel-success'
+    when :finished
+      'panel-warning'
+    end
+
+.col-lg-2.col-md-3.col-sm-4 id=dom_id(user)
+  .panel class=panel_class
     .panel-heading= user
     .panel-body
-      - if record
-        - if record.unfinished?
-          | 出社中
-        - else
-          | 退社済
-      - else
-        | 未出社
+      - case state
+      - when :unstarted
+        span.text-muted 未出社
+      - when :unfinished
+        span.text-success 出社中
+      - when :finished
+        span.text-warning 退社済
     table.table
       tr
         th.col-xs-4= Record.human_attribute_name :started_at

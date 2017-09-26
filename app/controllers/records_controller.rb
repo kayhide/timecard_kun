@@ -1,5 +1,5 @@
 class RecordsController < ApplicationController
-  before_action :set_user, only: [:start, :finish]
+  before_action :set_user
 
   # POST /user/1/records/start
   def start
@@ -9,7 +9,7 @@ class RecordsController < ApplicationController
 
   # POST /user/1/records/finish
   def finish
-    @record = @user.records.unfinished.recent.first || @user.records.create
+    @record = @user.records.unfinished.recent.last || @user.records.create
     @record.finished_at = Time.current
     @record.save
     render :update
