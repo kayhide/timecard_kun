@@ -1,7 +1,7 @@
 - content_for :breadcrumb do
   ol.breadcrumb
     li= link_to t('helpers.links.home'), :root
-    li= link_to User.model_name.human, :users
+    li= link_to User.model_name.human, [:admin, :users]
     li.active= @user
 
 .panel.panel-default

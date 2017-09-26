@@ -30,5 +30,5 @@
             tr
               td= record.started_at && l(record.started_at)
               td= record.finished_at && l(record.finished_at)
-              td.text-right= record.regular_span && format_span(record.regular_span)
-              td.text-right= record.early_span && format_span(record.early_span)
+              td= record.regular_span && format_span(record.regular_span)
+              td= record.early_span && format_span(record.early_span)

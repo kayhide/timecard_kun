@@ -1,0 +1,5 @@
+= form_for [:admin, @user], html: { class: %w(form-horizontal) } do |f|
+  = input f, :name
+  = buttons do
+    = f.submit nil, class: %w(btn btn-primary)
+    = link_to t('helpers.links.cancel'), [:admin, :users], class: %w(btn btn-default)

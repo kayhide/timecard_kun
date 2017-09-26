@@ -14,3 +14,5 @@ ja:
     no_item: '%{item}はありません。'
     was_created: '%{item}が作成されました。'
     was_updated: '%{item}が更新されました。'
+  layout:
+    record_index: '出勤簿'

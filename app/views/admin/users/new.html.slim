@@ -1,8 +1,8 @@
 - content_for :breadcrumb do
   ol.breadcrumb
     li= link_to t('helpers.links.home'), :root
-    li= link_to User.model_name.human, :users
-    li.active= @user.name_was
+    li= link_to User.model_name.human, [:admin, :users]
+    li.active= t('helpers.links.new')
 
 .row
   .col-md-8

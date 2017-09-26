@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root 'home#index'
 
-  resources :users do
+  resources :users, only: [] do
     resources :records, only: [] do
       collection do
         post :start
@@ -12,5 +12,6 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :records, only: [:index]
+    resources :users
   end
 end

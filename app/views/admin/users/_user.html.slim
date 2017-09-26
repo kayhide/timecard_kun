@@ -1,0 +1,7 @@
+tr id=dom_id(user)
+  td
+    a href=url_for([:admin, user])
+      = user.name
+  td
+    a.btn.btn-default.btn-xs href=url_for([:edit, :admin, user])
+      i.fa.fa-pencil

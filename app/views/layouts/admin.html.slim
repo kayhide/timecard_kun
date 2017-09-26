@@ -9,10 +9,14 @@ html
     = stylesheet_link_tag 'application', media: 'all'
     = javascript_include_tag 'application'
   body
-    nav.navbar.navbar-fixed-top.navbar-inverse
+    nav.navbar.navbar-fixed-top.navbar-default
       a.navbar-brand href=url_for(:root) =t 'header.site_title'
       button.navbar-toggle.btn.btn-primary type="button" data-toggle="collapse" data-target=".navbar-collapse"
         i.fa.fa-fw.fa-bars
+      .navbar-collapse.collapse
+        ul.nav.navbar-nav
+          li= link_to User.model_name.human, [:admin, :users]
+          li= link_to t('layout.record_index'), [:admin, :records]
     #breadcrumb= render 'layouts/breadcrumb'
     .container
       #message= render 'layouts/message'

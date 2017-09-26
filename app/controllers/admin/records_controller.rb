@@ -1,4 +1,4 @@
-class Admin::RecordsController < ApplicationController
+class Admin::RecordsController < AdminController
   before_action :set_cour
 
   # GET /admin/records

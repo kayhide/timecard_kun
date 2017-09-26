@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe UsersController, type: :controller do
+RSpec.describe Admin::UsersController, type: :controller do
 
   let(:invalid_attributes) {
     {
@@ -57,7 +57,7 @@ RSpec.describe UsersController, type: :controller do
 
       it "redirects to the created user" do
         post :create, params: {user: valid_attributes}, session: valid_session
-        expect(response).to redirect_to([:users])
+        expect(response).to redirect_to([:admin, :users])
       end
     end
 
@@ -87,7 +87,7 @@ RSpec.describe UsersController, type: :controller do
       it "redirects to the users list" do
         user = FactoryGirl.create(:user)
         put :update, params: {id: user.to_param, user: new_attributes}, session: valid_session
-        expect(response).to redirect_to([:users])
+        expect(response).to redirect_to([:admin, :users])
       end
     end
 
@@ -111,7 +111,7 @@ RSpec.describe UsersController, type: :controller do
     it "redirects to the users list" do
       user = FactoryGirl.create(:user)
       delete :destroy, params: {id: user.to_param}, session: valid_session
-      expect(response).to redirect_to(users_url)
+      expect(response).to redirect_to([:admin, :users])
     end
   end
 

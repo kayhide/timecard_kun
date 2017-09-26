@@ -7,13 +7,13 @@
   = paginate @users
   table.table.table-bordered.table-condensed.table-hover
     caption= render 'layouts/paginate_info', items: @users
-    = render partial: 'users/user', collection: @users
+    = render partial: 'admin/users/user', collection: @users
 - else
   .alert
     p.text-muted=t 'messages.no_item', item: User.model_name.human
 
 ul.list-inline
-  li= link_to [:new, :user], class: %w(btn btn-success) do
+  li= link_to [:new, :admin, :user], class: %w(btn btn-success) do
     i.fa.fa-plus>
     = User.model_name.human
 .clearfix

@@ -13,6 +13,6 @@ module ApplicationHelper
     h = span / 3600
     m = span % 3600 / 60
     s = span % 60
-    format('%d:%02d:%02d', h, m, s)
+    format('%02d:%02d:%02d', h, m, s)
   end
 end
