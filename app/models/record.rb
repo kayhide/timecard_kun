@@ -4,7 +4,7 @@ class Record < ApplicationRecord
   belongs_to :user
 
   COUR_START_DAY = 21
-  RECENT_SPAN = 24.hours
+  DAY_BEGINNING_OFFSET = 2.hours
   DEFAULT_STARTED_AT_OFFSET = 8.hours
 
   def self.cour_of time
@@ -27,7 +27,8 @@ class Record < ApplicationRecord
     where(finished_at: nil)
   }
   scope :recent, ->() {
-    where(started_at: RECENT_SPAN.ago .. Float::INFINITY)
+    x = (Time.current - DAY_BEGINNING_OFFSET).beginning_of_day + DAY_BEGINNING_OFFSET
+    where(started_at: x .. Float::INFINITY)
   }
 
   def unfinished?

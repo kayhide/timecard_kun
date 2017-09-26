@@ -55,4 +55,30 @@ RSpec.describe Record, type: :model do
       Record.last_cour
     end
   end
+
+  describe '.recent' do
+    after do
+      Timecop.return
+    end
+
+    it 'selects by started_at of after 2:00 today' do
+      Timecop.freeze(Time.zone.parse('2017-09-20 10:00:00'))
+      FactoryGirl.create(:record, started_at: Time.zone.parse('2017-09-20 01:59:59'))
+      records = [
+        FactoryGirl.create(:record, started_at: Time.zone.parse('2017-09-20 02:00:00')),
+        FactoryGirl.create(:record, started_at: Time.zone.parse('2017-09-20 10:00:00'))
+      ]
+      expect(Record.recent).to eq records
+    end
+
+    it 'takes last day when current time is before 2:00' do
+      Timecop.freeze(Time.zone.parse('2017-09-20 01:59:59'))
+      FactoryGirl.create(:record, started_at: Time.zone.parse('2017-09-19 01:59:59'))
+      records = [
+        FactoryGirl.create(:record, started_at: Time.zone.parse('2017-09-19 02:00:00')),
+        FactoryGirl.create(:record, started_at: Time.zone.parse('2017-09-20 01:59:59'))
+      ]
+      expect(Record.recent).to eq records
+    end
+  end
 end
