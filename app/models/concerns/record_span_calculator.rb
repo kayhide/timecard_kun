@@ -32,15 +32,18 @@ module RecordSpanCalculator
   def ensure_early_span
     if started_at_changed? || finished_at_changed?
       if finished_at
-        x = [split_point, finished_at].min
-        self.early_span = [0, x - computed_started_at].max
+        spans = Enumerator.new do |y|
+          x = computed_started_at
+          while x < finished_at
+            x1 = [finished_at, x.beginning_of_day + SPLIT_POINT_OFFSET].min
+            y << [0, x1 - x].max
+            x = x.beginning_of_day + 1.day
+          end
+        end
+        self.early_span = spans.sum
       else
         self.early_span = nil
       end
     end
-  end
-
-  def split_point
-    @split_point ||= finished_at.beginning_of_day + SPLIT_POINT_OFFSET
   end
 end
