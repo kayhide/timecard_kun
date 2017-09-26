@@ -81,4 +81,40 @@ RSpec.describe Record, type: :model do
       expect(Record.recent).to eq records
     end
   end
+
+  describe '#computed_started_at' do
+    let(:record) { FactoryGirl.build(:record, :without_user) }
+    let(:today) { Date.new(2017, 9, 25) }
+
+    before do
+      Timecop.freeze today
+    end
+
+    after do
+      Timecop.return
+    end
+
+    it 'returns started_at if existing' do
+      record.started_at = Time.zone.parse('09:00')
+      expect(record.computed_started_at).to eq Time.zone.parse('09:00')
+    end
+
+    it 'returns 8:00 of the day of finished_at' do
+      record.started_at = nil
+      record.finished_at = Time.zone.parse('09:00')
+      expect(record.computed_started_at).to eq Time.zone.parse('08:00')
+    end
+
+    it 'returns 8:00 of 1 day before when finished_at is before 8:00' do
+      record.started_at = nil
+      record.finished_at = Time.zone.parse('05:00')
+      expect(record.computed_started_at).to eq Time.zone.parse('08:00') - 1.day
+    end
+
+    it 'returns nil if started_at and finished_at are both nil' do
+      record.started_at = nil
+      record.finished_at = nil
+      expect(record.computed_started_at).to eq nil
+    end
+  end
 end

@@ -37,6 +37,7 @@ class Record < ApplicationRecord
 
   def computed_started_at
     started_at ||
+      finished_at &&
       (finished_at - DEFAULT_STARTED_AT_OFFSET).beginning_of_day + DEFAULT_STARTED_AT_OFFSET
   end
 end
