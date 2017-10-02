@@ -12,6 +12,11 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :records, only: [:index]
-    resources :users
+    resources :users do
+      member do
+        put :hidden, controller: 'users/hidden', action: :create
+        delete :hidden, controller: 'users/hidden', action: :destroy
+      end
+    end
   end
 end
