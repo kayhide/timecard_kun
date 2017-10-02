@@ -5,7 +5,7 @@ RSpec.describe Admin::Users::HiddenController, type: :controller do
     it 'sets hidden true' do
       user = FactoryGirl.create(:user)
       expect {
-        put :create, params: {id: user.to_param}
+        put :create, params: {id: user.to_param}, format: :js
       }.to change{ user.reload.hidden? }.from(false).to(true)
     end
   end
@@ -14,7 +14,7 @@ RSpec.describe Admin::Users::HiddenController, type: :controller do
     it 'sets hidden false' do
       user = FactoryGirl.create(:user, hidden: true)
       expect {
-        delete :destroy, params: {id: user.to_param}
+        delete :destroy, params: {id: user.to_param}, format: :js
       }.to change{ user.reload.hidden? }.from(true).to(false)
     end
   end

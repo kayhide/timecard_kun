@@ -5,3 +5,9 @@ tr id=dom_id(user)
   td
     a.btn.btn-default.btn-xs href=url_for([:edit, :admin, user])
       i.fa.fa-pencil
+    - if user.hidden?
+      = link_to [:hidden, :admin, user], method: :delete, remote: true, class: %w(btn btn-xs btn-default) do
+        i.fa.fa-eye-slash
+    - else
+      = link_to [:hidden, :admin, user], method: :put, remote: true, class: %w(btn btn-xs btn-default) do
+        i.fa.fa-eye
