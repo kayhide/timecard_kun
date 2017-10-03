@@ -1,5 +1,6 @@
 class Record < ApplicationRecord
   include RecordSpanCalculator
+  include RecordWorkingHours
 
   belongs_to :user
 
