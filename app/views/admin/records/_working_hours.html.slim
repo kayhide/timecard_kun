@@ -1,0 +1,13 @@
+table.table
+  tr
+    th=t '.yearly_regular_working_hours'
+    td.text-right= format_span yearly_regular_working_hours
+  tr
+    th=t '.boy_to_eoc_regular_working_hours'
+    td.text-right= format_span boy_to_eoc_regular_working_hours
+  tr
+    th=t '.boy_to_eoc_gross_working_hours'
+    td.text-right= format_span boy_to_eoc_gross_working_hours
+  tr
+    th=t '.over_working_hours'
+    td.text-right= format_span(boy_to_eoc_gross_working_hours - boy_to_eoc_regular_working_hours)

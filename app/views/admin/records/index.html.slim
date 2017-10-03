@@ -9,13 +9,19 @@
 
 - @records.group_by(&:user).each do |user, records|
   .page
-    h2.visible-print-block
+    h2.visible-print-block.pull-left
       | 出勤簿
       span.small=l @cour.first, format: :date_only
       span.small 〜
       span.small=l @cour.last - 1.day, format: :date_only
-
+    h3.pull-right= user.name
+    .clearfix
     .panel.panel-default
-      .panel-heading
-        = user.name
+      .panel-heading=t '.working_hours'
+      = render 'admin/records/working_hours',
+        yearly_regular_working_hours: Record::YEARLY_REGULAR_WORKING_HOURS.hours,
+        boy_to_eoc_regular_working_hours: Record.regular_working_hours_to(@cour.last),
+        boy_to_eoc_gross_working_hours: @boy_to_eoc_regular_span_sums[user.id]
+    .panel.panel-default
+      .panel-heading=t '.table'
       = render 'admin/records/table', records: records

@@ -16,3 +16,15 @@ ja:
     was_updated: '%{item}が更新されました。'
   layout:
     record_index: '出勤簿'
+  admin:
+    records:
+      index:
+        table: 明細
+        working_hours: 所定労働時間
+      table:
+        sum: 合計
+      working_hours:
+        yearly_regular_working_hours: 年間所定労働時間
+        boy_to_eoc_regular_working_hours: 年初から締日までの所定労働時間
+        boy_to_eoc_gross_working_hours: 年初から締日までの合計労働時間
+        over_working_hours: 超過労働時間
