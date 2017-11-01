@@ -1,4 +1,5 @@
 class Record < ApplicationRecord
+  include RecordStartSetter
   include RecordSpanCalculator
   include RecordWorkingHours
 
