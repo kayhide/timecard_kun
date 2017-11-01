@@ -10,9 +10,16 @@ html
     = javascript_include_tag 'application'
   body
     nav.navbar.navbar-fixed-top.navbar-inverse
-      a.navbar-brand href=url_for(:root) =t 'header.site_title'
-      button.navbar-toggle.btn.btn-primary type="button" data-toggle="collapse" data-target=".navbar-collapse"
-        i.fa.fa-fw.fa-bars
+      .container-fluid
+        a.navbar-brand href=url_for(:root) =t 'header.site_title'
+        button.navbar-toggle.btn.btn-primary type="button" data-toggle="collapse" data-target=".navbar-collapse"
+          i.fa.fa-fw.fa-bars
+        ul.nav.navbar-nav.navbar-right
+          li.dropdown.bordered
+            a.dropdown-toggle data-toggle="dropdown" href="#"
+              i.fa.fa-fw.fa-caret-down
+            ul.dropdown-menu
+              li= link_to User.model_name.human, [:admin, :users]
     .container-fluid
       #message= render 'layouts/message'
       = yield
