@@ -18,10 +18,10 @@
     .clearfix
     .panel.panel-default
       .panel-heading=t '.working_hours'
-      = render 'admin/records/working_hours',
+      = render 'working_hours',
         yearly_regular_working_hours: Record::YEARLY_REGULAR_WORKING_HOURS.hours,
         boy_to_eoc_regular_working_hours: Record.regular_working_hours_to(@cour.last),
         boy_to_eoc_gross_working_hours: @boy_to_eoc_regular_span_sums[user.id]
     .panel.panel-default
       .panel-heading=t '.table'
-      = render 'admin/records/table', records: records
+      = render 'table', records: records

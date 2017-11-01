@@ -5,8 +5,9 @@ class Admin::Records::PrintablesController < AdminController
   def index
     @records =
       Record.cour(@cour)
+            .finished
             .includes(:user)
-            .order(finished_at: :asc)
+            .order(started_at: :asc)
 
     @boy_to_eoc_regular_span_sums =
       Record.where(finished_at: @cour.last.beginning_of_year ... @cour.last)
