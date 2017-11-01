@@ -16,6 +16,7 @@ html
       .navbar-collapse.collapse
         ul.nav.navbar-nav
           li= link_to User.model_name.human, [:admin, :users]
+          li= link_to Record.model_name.human, [:admin, :records]
           li= link_to [:admin, :records, :printables] do
             i.fa.fa-print>
             =t 'layout.records_printables'

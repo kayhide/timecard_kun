@@ -1,0 +1,13 @@
+- content_for :breadcrumb do
+  ol.breadcrumb
+    li= link_to t('helpers.links.home'), :root
+    li.active= Record.model_name.human
+
+= render 'admin/month_selector', path: [:admin, :records], active_date: @cour.first
+
+.panel.panel-default
+  .panel-heading
+    span=l @cour.first.to_date
+    span 〜
+    span=l @cour.last.to_date - 1.day
+  = render 'admin/records/table', records: @records

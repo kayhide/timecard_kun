@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     namespace :records do
       resources :printables, only: [:index]
     end
+    resources :records
     resources :users do
       member do
         put :hidden, controller: 'users/hidden', action: :create
