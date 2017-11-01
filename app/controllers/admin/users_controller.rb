@@ -9,7 +9,7 @@ class Admin::UsersController < AdminController
 
   # GET /admin/users/1
   def show
-    @records = @user.records.cour(@cour).order(created_at: :desc)
+    @records = @user.records.cour(@cour).order(finished_at: :asc)
   end
 
   # GET /admin/users/new

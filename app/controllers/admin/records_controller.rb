@@ -6,7 +6,7 @@ class Admin::RecordsController < AdminController
     @records =
       Record.cour(@cour)
             .includes(:user)
-            .order(started_at: :asc)
+            .order(finished_at: :asc)
 
     @boy_to_eoc_regular_span_sums =
       Record.where(finished_at: @cour.last.beginning_of_year ... @cour.last)
