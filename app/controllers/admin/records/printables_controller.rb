@@ -10,7 +10,7 @@ class Admin::Records::PrintablesController < AdminController
             .order(started_at: :asc)
 
     @boy_to_eoc_regular_span_sums =
-      Record.where(finished_at: @cour.last.beginning_of_year ... @cour.last)
+      Record.where(started_at: @cour.last.beginning_of_year ... @cour.last)
             .group(:user_id)
             .sum(:regular_span)
   end

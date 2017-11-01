@@ -17,7 +17,7 @@ class Record < ApplicationRecord
   end
 
   scope :cour, ->(range) {
-    where(finished_at: range)
+    where(started_at: range)
   }
   scope :current_cour, ->() {
     cour(cour_of(Time.current))

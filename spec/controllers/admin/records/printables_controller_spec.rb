@@ -13,12 +13,12 @@ RSpec.describe Admin::Records::PrintablesController, type: :controller do
     end
 
     it "assigns records of given cour" do
-      FactoryGirl.create(:record, finished_at: '2016-03-20 23:59:59')
+      FactoryGirl.create(:record, started_at: '2016-03-20 23:59:59')
       records = [
-        FactoryGirl.create(:record, finished_at: '2016-03-21 00:00:00'),
-        FactoryGirl.create(:record, finished_at: '2016-04-20 23:59:59')
+        FactoryGirl.create(:record, started_at: '2016-03-21 00:00:00'),
+        FactoryGirl.create(:record, started_at: '2016-04-20 23:59:59')
       ]
-      FactoryGirl.create(:record, finished_at: '2016-04-21 00:00:00')
+      FactoryGirl.create(:record, started_at: '2016-04-21 00:00:00')
       get :index, params: { year: '2016', month: '3' }
       expect(assigns(:records)).to eq records
     end

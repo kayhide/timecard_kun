@@ -19,12 +19,12 @@ RSpec.describe Record, type: :model do
   end
 
   describe '.cour' do
-    it 'selects by finished_at' do
+    it 'selects by started_at' do
       range = Time.zone.local(2017, 8, 21) ... Time.zone.local(2017, 9, 21)
-      FactoryGirl.create(:record, finished_at: Time.new(2017, 8, 20))
+      FactoryGirl.create(:record, started_at: Time.new(2017, 8, 20))
       records = [
-        FactoryGirl.create(:record, finished_at: Time.new(2017, 8, 21)),
-        FactoryGirl.create(:record, finished_at: Time.new(2017, 9, 20))
+        FactoryGirl.create(:record, started_at: Time.new(2017, 8, 21)),
+        FactoryGirl.create(:record, started_at: Time.new(2017, 9, 20))
       ]
       expect(Record.cour(range).sort).to eq records
     end
