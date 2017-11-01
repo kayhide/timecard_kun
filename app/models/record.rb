@@ -25,6 +25,9 @@ class Record < ApplicationRecord
   scope :last_cour, ->() {
     cour(cour_of(Time.current - 1.month))
   }
+  scope :finished, ->() {
+    where.not(finished_at: nil)
+  }
   scope :unfinished, ->() {
     where(finished_at: nil)
   }
