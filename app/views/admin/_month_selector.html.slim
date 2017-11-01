@@ -1,0 +1,19 @@
+- start_date = Date.new(2017, 8)
+- end_date_ = Date.current
+- end_date = Record.cour_of(Date.current).first
+
+p
+  - months(start_date, end_date).group_by(&:year).reverse_each do |year, dates|
+    .form-inline
+      label>= year
+      .btn-group
+        - (1...dates.first.month).each do |month|
+          = link_to month, [*path, { year: year, month: month} ], class: %w(btn btn-default disabled)
+        - dates.map(&:month).each do |month|
+          ruby:
+            classes = [
+              'btn',
+              (end_date.year == year && end_date.month == month) ? 'btn-info' : 'btn-default',
+              (active_date.year == year && active_date.month == month) ? 'active' : nil
+            ].compact
+          = link_to month, [*path, { year: year, month: month} ], class: classes

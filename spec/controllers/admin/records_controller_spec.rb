@@ -12,16 +12,6 @@ RSpec.describe Admin::RecordsController, type: :controller do
       Timecop.return
     end
 
-    it "assigns current cour" do
-      get :index
-      expect(assigns(:cour)).to eq (Time.zone.parse('2017-09-21') ... Time.zone.parse('2017-10-21'))
-    end
-
-    it "assigns cour by params" do
-      get :index, params: { year: '2016', month: '3' }
-      expect(assigns(:cour)).to eq (Time.zone.parse('2016-03-21') ... Time.zone.parse('2016-04-21'))
-    end
-
     it "assigns records of given cour" do
       FactoryGirl.create(:record, finished_at: '2016-03-20 23:59:59')
       records = [

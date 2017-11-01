@@ -4,9 +4,11 @@
     li= link_to User.model_name.human, [:admin, :users]
     li.active= @user
 
+= render 'admin/month_selector', path: [:admin, @user], active_date: @cour.first
+
 .panel.panel-default
   .panel-heading
-    span=l @current_cour.first.to_date
+    span=l @cour.first.to_date
     span 〜
-    span=l @current_cour.last.to_date - 1.day
+    span=l @cour.last.to_date - 1.day
   = render 'admin/records/table', records: @records

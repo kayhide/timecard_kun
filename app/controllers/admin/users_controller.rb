@@ -1,5 +1,6 @@
 class Admin::UsersController < AdminController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_cour, only: [:show]
 
   # GET /admin/users
   def index
@@ -8,8 +9,7 @@ class Admin::UsersController < AdminController
 
   # GET /admin/users/1
   def show
-    @current_cour = Record.cour_of(Time.current)
-    @records = @user.records.cour(@current_cour).order(created_at: :desc)
+    @records = @user.records.cour(@cour).order(created_at: :desc)
   end
 
   # GET /admin/users/new

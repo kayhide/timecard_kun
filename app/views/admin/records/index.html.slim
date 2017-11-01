@@ -5,7 +5,7 @@
     span.small 〜
     span.small=l @cour.last - 1.day, format: :date_only
 
-  = render 'month_selector', active_date: @cour.first
+  = render 'admin/month_selector', path: [:admin, :records], active_date: @cour.first
 
 - @records.group_by(&:user).each do |user, records|
   .page
