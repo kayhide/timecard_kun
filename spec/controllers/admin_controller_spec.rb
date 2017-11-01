@@ -25,7 +25,7 @@ RSpec.shared_examples_for AdminController do |args|
 end
 
 
-RSpec.describe Admin::RecordsController, type: :controller do
+RSpec.describe Admin::Records::PrintablesController, type: :controller do
   describe "GET #index" do
     let(:action) { :index }
     let(:params) { {} }

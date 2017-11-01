@@ -16,7 +16,9 @@ html
       .navbar-collapse.collapse
         ul.nav.navbar-nav
           li= link_to User.model_name.human, [:admin, :users]
-          li= link_to t('layout.record_index'), [:admin, :records]
+          li= link_to [:admin, :records, :printables] do
+            i.fa.fa-print>
+            =t 'layout.records_printables'
     #breadcrumb= render 'layouts/breadcrumb'
     .container
       #message= render 'layouts/message'

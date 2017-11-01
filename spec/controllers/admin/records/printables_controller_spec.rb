@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Admin::RecordsController, type: :controller do
+RSpec.describe Admin::Records::PrintablesController, type: :controller do
   let(:today) { Time.zone.parse('2017-10-03 19:19:41') }
 
   describe "GET #index" do

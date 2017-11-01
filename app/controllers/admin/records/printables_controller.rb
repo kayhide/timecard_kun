@@ -1,7 +1,7 @@
-class Admin::RecordsController < AdminController
+class Admin::Records::PrintablesController < AdminController
   before_action :set_cour
 
-  # GET /admin/records
+  # GET /admin/records/printables
   def index
     @records =
       Record.cour(@cour)

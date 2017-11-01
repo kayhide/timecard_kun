@@ -11,7 +11,9 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    resources :records, only: [:index]
+    namespace :records do
+      resources :printables, only: [:index]
+    end
     resources :users do
       member do
         put :hidden, controller: 'users/hidden', action: :create
