@@ -1,0 +1,5 @@
+$('#new_record').before("<%=j render('admin/records/record', record: @record) %>");
+$('#<%= dom_id @record %> .editable').editable();
+setTimeout(() => {
+  $('#new_record .editable').editable('setValue', null);
+});

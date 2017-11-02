@@ -10,15 +10,11 @@ class Admin::RecordsController < AdminController
             .order(started_at: :asc, user_id: :asc)
   end
 
-  # POST /admin/records
+  # POST /admin/records.js
   def create
     @record = Record.new(record_params)
-
-    if @record.save
-      redirect_to [:admin, :records], notice: 'Record was successfully created.'
-    else
-      redirect_to [:admin, :records], alert: 'Failed to create record.'
-    end
+    @record.started_at ||= Time.current
+    @record.save!
   end
 
   # PATCH/PUT /admin/records/1.js

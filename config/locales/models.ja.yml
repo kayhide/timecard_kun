@@ -12,6 +12,7 @@ ja:
         name: 名前
       record:
         <<: *timestamps
+        user_id: ユーザー
         started_at: 出社時刻
         finished_at: 退社時刻
         regular_span: 勤務時間

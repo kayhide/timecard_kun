@@ -10,3 +10,4 @@ table#records.table.table-striped
   tbody
     - records.each do |record|
       = render 'admin/records/record', record: record
+    = render 'admin/records/new_record'

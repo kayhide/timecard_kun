@@ -16,7 +16,7 @@ RSpec.describe Admin::RecordsController, type: :controller do
     end
   end
 
-  describe "POST #create" do
+  describe "POST #create.js" do
     let(:user) { FactoryGirl.create(:user) }
     let(:valid_attributes) {
       {
@@ -27,20 +27,15 @@ RSpec.describe Admin::RecordsController, type: :controller do
     context "with valid params" do
       it "creates a new Record" do
         expect {
-          post :create, params: {record: valid_attributes}
+          post :create, params: {record: valid_attributes}, format: :js
         }.to change(Record, :count).by(1)
-      end
-
-      it "redirects to the record list" do
-        post :create, params: {record: valid_attributes}
-        expect(response).to redirect_to([:admin, :records])
       end
     end
 
     context "with invalid params" do
-      it "redirects to the record list" do
-        post :create, params: {record: invalid_attributes}
-        expect(response).to redirect_to([:admin, :records])
+      it "responses with unprocessable entity" do
+        post :create, params: {record: invalid_attributes}, format: :js
+        expect(response).to have_http_status(:unprocessable_entity)
       end
     end
   end
