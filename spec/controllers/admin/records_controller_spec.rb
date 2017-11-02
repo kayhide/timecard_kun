@@ -65,7 +65,7 @@ RSpec.describe Admin::RecordsController, type: :controller do
     end
 
     context "with invalid params" do
-      it "redirects to the record list" do
+      it "responses with unprocessable entity" do
         patch :update, params: {id: record.id, record: invalid_attributes}, format: :js
         expect(response).to have_http_status(:unprocessable_entity)
       end

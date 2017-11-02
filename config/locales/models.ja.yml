@@ -16,3 +16,5 @@ ja:
         finished_at: 退社時刻
         regular_span: 勤務時間
         early_span: 早朝時間
+        dateless_started_at: 出社時刻
+        dateless_finished_at: 退社時刻

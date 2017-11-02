@@ -3,10 +3,10 @@ tr id=dom_id(record)
   td
     = link_to record.user.name, [:admin, record.user, params.permit(:year, :month).to_h]
   td class=(record.is_start_implicit ? 'text-muted' : nil)
-    = editable record, :started_at, [:admin, record], disabled: true, class: %w(editable) do
+    = editable record, :dateless_started_at, [:admin, record], disabled: true, class: %w(editable) do
       = record.started_at && l(record.started_at, format: :time_only)
   td
-    = editable record, :finished_at, [:admin, record], disabled: true, class: %w(editable) do
+    = editable record, :dateless_finished_at, [:admin, record], disabled: true, class: %w(editable) do
       = record.finished_at && l(record.finished_at, format: :time_only)
   td= record.regular_span && format_span(record.regular_span)
   td= record.early_span && format_span(record.early_span)
