@@ -1,9 +1,10 @@
 - record = Record.new
-tr id=dom_id(record)
+tr#new_record.editable-following style="display:none"
   td.text-muted=l Date.current
   td
     - source = User.order(:id).pluck(:id, :name)
     = editable record, :user_id, [:admin, record], class: %w(editable), type: 'select', source: source do
+  td
   td
   td
   td

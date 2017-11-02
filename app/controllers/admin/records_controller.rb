@@ -22,10 +22,9 @@ class Admin::RecordsController < AdminController
     @record.update!(record_params)
   end
 
-  # DELETE /admin/records/1
+  # DELETE /admin/records/1.js
   def destroy
     @record.destroy
-    redirect_to [:admin, :records], notice: 'Record was successfully destroyed.'
   end
 
   private

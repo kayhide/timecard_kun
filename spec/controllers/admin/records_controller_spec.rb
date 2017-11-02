@@ -72,14 +72,8 @@ RSpec.describe Admin::RecordsController, type: :controller do
 
     it "destroys the requested record" do
       expect {
-        delete :destroy, params: {id: record.id}
+        delete :destroy, params: {id: record.id}, format: :js
       }.to change(Record, :count).by(-1)
     end
-
-    it "redirects to the records list" do
-      delete :destroy, params: {id: record.id}
-      expect(response).to redirect_to([:admin, :records])
-    end
   end
-
 end

@@ -1,12 +1,13 @@
 table#records.table.table-striped
   thead
     tr
-      th.col-sm-2
+      th.col-sm-2= Record.human_attribute_name :started_on
       th.col-sm-2= User.human_attribute_name :name
       th.col-sm-2= Record.human_attribute_name :started_at
       th.col-sm-2= Record.human_attribute_name :finished_at
       th.col-sm-2= Record.human_attribute_name :regular_span
       th.col-sm-2= Record.human_attribute_name :early_span
+      th.col-sm-1
   tbody
     - records.each do |record|
       = render 'admin/records/record', record: record

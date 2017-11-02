@@ -17,6 +17,8 @@ $ ->
     if e.hasClass('active')
       e.removeClass('active')
       $(e.data('toggle-editable')).editable('disable')
+      $('.editable-following').fadeOut()
     else
       e.addClass('active')
       $(e.data('toggle-editable')).editable('enable')
+      $('.editable-following').fadeIn()
