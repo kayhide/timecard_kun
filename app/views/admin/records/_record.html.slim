@@ -1,5 +1,7 @@
 tr id=dom_id(record)
-  td= record.started_at && l(record.started_at, format: :date_only)
+  td
+    = editable record, :started_on, [:admin, record], type: :date, disabled: true, class: %w(editable) do
+      = record.started_at && l(record.started_at, format: :date_only)
   td
     = link_to record.user.name, [:admin, record.user, params.permit(:year, :month).to_h]
   td class=(record.is_start_implicit ? 'text-muted' : nil)

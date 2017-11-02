@@ -34,6 +34,7 @@ class Admin::RecordsController < AdminController
   end
 
   def record_params
-    params.require(:record).permit(:user_id, :started_at, :finished_at, :dateless_started_at, :dateless_finished_at)
+    params.require(:record)
+          .permit(:user_id, :started_at, :finished_at, :started_on, :dateless_started_at, :dateless_finished_at)
   end
 end
