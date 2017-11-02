@@ -1,9 +1,0 @@
-= form_for @admin_record do |f|
-  - if @admin_record.errors.any?
-    #error_explanation
-      h2 = "#{pluralize(@admin_record.errors.count, "error")} prohibited this admin_record from being saved:"
-      ul
-        - @admin_record.errors.full_messages.each do |message|
-          li = message
-
-  .actions = f.submit

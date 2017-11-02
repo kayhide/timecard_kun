@@ -19,6 +19,7 @@ gem 'kaminari'
 gem 'bootstrap-sass'
 gem 'font-awesome-rails'
 gem 'jquery-rails'
+gem 'bootstrap-editable-rails'
 gem 'rails-i18n'
 
 gem 'mechanize'

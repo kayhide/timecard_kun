@@ -2,7 +2,7 @@
 - end_date_ = Date.current
 - end_date = Record.cour_of(Date.current).first
 
-p
+.month-selector
   - months(start_date, end_date).group_by(&:year).reverse_each do |year, dates|
     .form-inline
       label>= year

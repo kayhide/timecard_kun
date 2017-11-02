@@ -1,6 +1,7 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "font-awesome";
+@import "bootstrap-editable";
 
 h2 {
     span {
@@ -26,6 +27,10 @@ h2 {
         @extend .fa-spinner:before;
         @extend .fa-pulse;
     }
+}
+
+.month-selector {
+    margin-bottom: 20px;
 }
 
 .spacive {

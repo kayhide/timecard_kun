@@ -45,7 +45,7 @@ RSpec.describe Admin::RecordsController, type: :controller do
     end
   end
 
-  describe "PUT #update" do
+  describe "PATCH #update.js" do
     let!(:record) { FactoryGirl.create(:record) }
 
     context "with valid params" do
@@ -57,21 +57,16 @@ RSpec.describe Admin::RecordsController, type: :controller do
       }
 
       it "updates the requested record" do
-        put :update, params: {id: record.id, record: new_attributes}
+        patch :update, params: {id: record.id, record: new_attributes}, format: :js
         record.reload
         expect(record.started_at).to eq Time.zone.parse('2017-10-03 9:57:11')
         expect(record.finished_at).to eq Time.zone.parse('2017-10-03 17:19:41')
-      end
-
-      it "redirects to the record list" do
-        put :update, params: {id: record.id, record: new_attributes}
-        expect(response).to redirect_to([:admin, :records])
       end
     end
 
     context "with invalid params" do
       it "redirects to the record list" do
-        put :update, params: {id: record.id, record: invalid_attributes}
+        patch :update, params: {id: record.id, record: invalid_attributes}, format: :js
         expect(response).to redirect_to([:admin, :records])
       end
     end

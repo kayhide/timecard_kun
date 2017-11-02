@@ -21,13 +21,9 @@ class Admin::RecordsController < AdminController
     end
   end
 
-  # PATCH/PUT /admin/records/1
+  # PATCH/PUT /admin/records/1.js
   def update
-    if @record.update(record_params)
-      redirect_to [:admin, :records], notice: 'Record was successfully updated.'
-    else
-      redirect_to [:admin, :records], alert: 'Failed to update record.'
-    end
+    @record.update!(record_params)
   end
 
   # DELETE /admin/records/1
