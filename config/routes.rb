@@ -14,12 +14,13 @@ Rails.application.routes.draw do
     namespace :records do
       resources :printables, only: [:index]
     end
-    resources :records
+    resources :records, only: [:index, :create, :update, :destroy]
     resources :users do
       member do
         put :hidden, controller: 'users/hidden', action: :create
         delete :hidden, controller: 'users/hidden', action: :destroy
       end
+      resources :records, only: [:index, :create, :update, :destroy]
     end
   end
 end

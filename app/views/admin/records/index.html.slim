@@ -1,7 +1,11 @@
 - content_for :breadcrumb do
   ol.breadcrumb
     li= link_to t('helpers.links.home'), :root
-    li.active= Record.model_name.human
+    - if @user
+      li= link_to Record.model_name.human, [:admin, :records]
+      li.active= @user
+    - else
+      li.active= Record.model_name.human
 
 .pull-left
   = render 'admin/month_selector', path: [:admin, :records], active_date: @cour.first

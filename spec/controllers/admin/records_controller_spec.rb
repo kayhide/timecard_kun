@@ -9,10 +9,28 @@ RSpec.describe Admin::RecordsController, type: :controller do
   }
 
   describe "GET #index" do
-    it "returns a success response" do
-      record = FactoryGirl.create(:record)
+    let(:today) { Time.zone.parse('2017-11-04 16:49:12') }
+
+    before do
+      Timecop.freeze today
+    end
+
+    after do
+      Timecop.return
+    end
+
+    it "assigns records" do
+      records = FactoryGirl.create_list(:record, 2, started_at: Time.current)
       get :index, params: {}
-      expect(response).to be_success
+      expect(assigns(:records)).to eq records
+    end
+
+    it 'filters if :user_id is given' do
+      user = FactoryGirl.create(:user)
+      records = FactoryGirl.create_list(:record, 2, user: user, started_at: Time.current)
+      FactoryGirl.create(:record, started_at: Time.current)
+      get :index, params: { user_id: user.id }
+      expect(assigns(:records)).to eq records
     end
   end
 

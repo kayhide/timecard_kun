@@ -3,7 +3,7 @@ tr id=dom_id(record)
     = editable record, :started_on, [:admin, record], type: :date, disabled: true, class: %w(editable) do
       = record.started_at && l(record.started_at, format: :date_only)
   td
-    = link_to record.user.name, [:admin, record.user, params.permit(:year, :month).to_h]
+    = link_to record.user.name, [:admin, record.user, :records, params.permit(:year, :month).to_h]
   td class=(record.is_start_implicit ? 'text-muted' : nil)
     = editable record, :dateless_started_at, [:admin, record], disabled: true, class: %w(editable) do
       = record.started_at && l(record.started_at, format: :time_only)
