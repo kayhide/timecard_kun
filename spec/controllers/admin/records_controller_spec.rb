@@ -48,6 +48,24 @@ RSpec.describe Admin::RecordsController, type: :controller do
           post :create, params: {record: valid_attributes}, format: :js
         }.to change(Record, :count).by(1)
       end
+
+      it 'creates with :user_id param only' do
+        expect {
+          post :create, params: {user_id: user.id}, format: :js
+        }.to change(Record, :count).by(1)
+        record = Record.last
+        expect(record.user).to eq user
+      end
+
+      it 'creates with :user_id and other params' do
+        attrs = { started_at: Time.zone.parse('2017-11-04 16:49:12') }
+        expect {
+          post :create, params: {user_id: user.id, record: attrs}, format: :js
+        }.to change(Record, :count).by(1)
+        record = Record.last
+        expect(record.user).to eq user
+        expect(record.started_at).to eq Time.zone.parse('2017-11-04 16:49:12')
+      end
     end
 
     context "with invalid params" do

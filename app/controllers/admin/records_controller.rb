@@ -14,7 +14,7 @@ class Admin::RecordsController < AdminController
   # POST /admin/records.js
   def create
     @record = Record.new(record_params)
-    @record.started_at ||= Time.current
+    @record.finished_at ||= Time.current
     @record.save!
   end
 
@@ -39,7 +39,9 @@ class Admin::RecordsController < AdminController
   end
 
   def record_params
-    params.require(:record)
-          .permit(:user_id, :started_at, :finished_at, :started_on, :dateless_started_at, :dateless_finished_at)
+    ps = params.key?(:user_id) ?
+           params.slice(:user_id).merge(params[:record]&.permit!) :
+           params.require(:record)
+    ps.permit(:user_id, :started_at, :finished_at, :started_on, :dateless_started_at, :dateless_finished_at)
   end
 end

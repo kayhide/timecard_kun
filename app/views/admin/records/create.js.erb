@@ -1,8 +1,8 @@
 $('#new_record').before("<%=j render('admin/records/record', record: @record) %>");
 $('#<%= dom_id @record %>').hide();
-$('#<%= dom_id @record %>').fadeIn('slow');
 $('#<%= dom_id @record %> .editable').editable();
-$('#<%= dom_id @record %> .editable-following').fadeIn();
 setTimeout(() => {
+  $('#<%= dom_id @record %>').fadeIn('slow');
+  $('#<%= dom_id @record %> .editable-following').fadeIn();
   $('#new_record .editable').editable('setValue', null);
 });
