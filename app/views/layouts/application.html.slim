@@ -20,6 +20,7 @@ html
               i.fa.fa-fw.fa-caret-down
             ul.dropdown-menu
               li= link_to User.model_name.human, [:admin, :users]
+              li= link_to Record.model_name.human, [:admin, :records]
     .container-fluid
       #message= render 'layouts/message'
       = yield
