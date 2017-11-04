@@ -5,6 +5,7 @@ class Record < ApplicationRecord
   include RecordWorkingHours
 
   belongs_to :user
+  validates :started_at, presence: true
 
   COUR_START_DAY = 21
   DAY_BEGINNING_OFFSET = 2.hours

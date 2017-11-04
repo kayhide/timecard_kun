@@ -15,7 +15,7 @@ module RecordSpanCalculator
   def ensure_regular_span
     if started_at_changed? || finished_at_changed?
       if finished_at
-        self.regular_span = [0, finished_at - computed_started_at].max
+        self.regular_span = [0, finished_at - started_at].max
         take_break_time
       else
         self.regular_span = nil
@@ -33,7 +33,7 @@ module RecordSpanCalculator
     if started_at_changed? || finished_at_changed?
       if finished_at
         spans = Enumerator.new do |y|
-          x = computed_started_at
+          x = started_at
           while x < finished_at
             x1 = [finished_at, x.beginning_of_day + SPLIT_POINT_OFFSET].min
             y << [0, x1 - x].max

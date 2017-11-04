@@ -9,9 +9,8 @@ module RecordStartSetter
   private
 
   def ensure_started_at
-    if !started_at || finished_at
+    if !started_at && finished_at
       self.started_at = computed_started_at
-      self.is_start_implicit = true
     end
 
     return unless started_on

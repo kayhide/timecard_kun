@@ -12,13 +12,12 @@ RSpec.shared_examples RecordStartSetter do
       Timecop.return
     end
 
-    it 'set 8:00 and is_start_implicit if started_at is absent' do
+    it 'set 8:00 if started_at is absent' do
       record.started_at = nil
       record.finished_at = Time.zone.parse('10:23')
       expect {
         record.save
       }.to change { record.started_at }.from(nil).to(Time.zone.parse('08:00'))
-      expect(record.is_start_implicit).to eq true
     end
 
     it 'do nothing if started_at is present' do
