@@ -17,3 +17,6 @@ table.table
   tr
     th=t '.early_hours'
     td.text-right= format_span early_hours
+  tr
+    th=t '.early_payment'
+    td.text-right= number_to_currency early_payment, locale: :ja

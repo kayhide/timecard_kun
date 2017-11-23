@@ -26,12 +26,14 @@
     .clearfix
     .panel.panel-default
       .panel-heading=t '.working_hours'
+      - early_hours = records.map(&:early_span).sum
       = render 'working_hours',
         yearly_regular_working_hours: Record::YEARLY_REGULAR_WORKING_HOURS.hours,
         boy_to_eoc_regular_working_hours: Record.regular_working_hours_to(@cour.last),
         boy_to_eoc_gross_working_hours: @boy_to_eoc_regular_span_sums[user.id] || 0,
         working_days: records.map(&:started_at).map(&:to_date).uniq.count,
-        early_hours: records.map(&:early_span).sum
+        early_hours: early_hours,
+        early_payment: Record.early_payment(early_hours)
 
     .panel.panel-default
       .panel-heading=t '.table'

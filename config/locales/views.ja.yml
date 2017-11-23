@@ -30,4 +30,5 @@ ja:
           boy_to_eoc_gross_working_hours: 年初から締日までの合計労働時間
           over_working_hours: 超過労働時間
           working_days: 勤務日数
-          early_hours: 早朝時間
+          early_hours: 早朝勤務時間
+          early_payment: 早朝勤務手当

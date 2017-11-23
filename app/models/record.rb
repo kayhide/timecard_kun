@@ -3,6 +3,7 @@ class Record < ApplicationRecord
   include RecordDatelessHandler
   include RecordSpanCalculator
   include RecordWorkingHours
+  include RecordEarlyPayment
 
   belongs_to :user
   validates :started_at, presence: true
