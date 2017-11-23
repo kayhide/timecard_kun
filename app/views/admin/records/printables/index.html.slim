@@ -1,44 +1,52 @@
-.hidden-print
-  h2
-    | 出勤簿
-    span.small=l @cour.first, format: :date_only
-    span.small 〜
-    span.small=l @cour.last - 1.day, format: :date_only
+.row
+  .col-md-2.hidden-print.hidden-xs.hidden-sm.sidemenu
+    ul.list-group
+      - @users.each do |user|
+        a.list-group-item href="##{dom_id(user)}" = user.name
+  .col-md-10.col-md-offset-2
+    .hidden-print
+      h2
+        | 出勤簿
+        span.small=l @cour.first, format: :date_only
+        span.small 〜
+        span.small=l @cour.last - 1.day, format: :date_only
 
-  .pull-left
-    = render 'admin/month_selector', path: [:admin, :records, :printables], active_date: @cour.first
+      .pull-left
+        = render 'admin/month_selector', path: [:admin, :records, :printables], active_date: @cour.first
 
-  .pull-right
-    button.btn.btn-default data-toggle="collapse" data-target=".no-records"
-      i.fa.fa-users
+      .pull-right
+        button.btn.btn-default data-toggle="collapse" data-target=".no-records"
+          i.fa.fa-users
 
-  .clearfix
+      .clearfix
 
-- @users.each do |user|
-  - records = @records[user.id] || []
-  .page class=(records.present? ? '' : 'collapse no-records')
-    h2.visible-print-block.pull-left
-      | 出勤簿
-      span.small=l @cour.first, format: :date_only
-      span.small 〜
-      span.small=l @cour.last - 1.day, format: :date_only
-    h3.pull-right= user.name
-    .clearfix
-    .panel.panel-default
-      .panel-heading=t '.working_hours'
-      - early_hours = records.map(&:early_span).sum
-      = render 'working_hours',
-        yearly_regular_working_hours: Record::YEARLY_REGULAR_WORKING_HOURS.hours,
-        boy_to_eoc_regular_working_hours: Record.regular_working_hours_to(@cour.last),
-        boy_to_eoc_gross_working_hours: @boy_to_eoc_regular_span_sums[user.id] || 0,
-        working_days: records.map(&:started_at).map(&:to_date).uniq.count,
-        early_hours: early_hours,
-        early_payment: Record.early_payment(early_hours)
+    - @users.each do |user|
+      - records = @records[user.id] || []
+      .page class=(records.present? ? '' : 'collapse no-records')
+        h2.visible-print-block.pull-left
+          | 出勤簿
+          span.small=l @cour.first, format: :date_only
+          span.small 〜
+          span.small=l @cour.last - 1.day, format: :date_only
+        a.anchor name=dom_id(user)
+        h3.pull-right
+          a href="##{dom_id(user)}" = user.name
+        .clearfix
+        .panel.panel-default
+          .panel-heading=t '.working_hours'
+          - early_hours = records.map(&:early_span).sum
+          = render 'working_hours',
+            yearly_regular_working_hours: Record::YEARLY_REGULAR_WORKING_HOURS.hours,
+            boy_to_eoc_regular_working_hours: Record.regular_working_hours_to(@cour.last),
+            boy_to_eoc_gross_working_hours: @boy_to_eoc_regular_span_sums[user.id] || 0,
+            working_days: records.map(&:started_at).map(&:to_date).uniq.count,
+            early_hours: early_hours,
+            early_payment: Record.early_payment(early_hours)
 
-    .panel.panel-default
-      .panel-heading=t '.table'
-      - if records.present?
-        = render 'table', records: records
-      - else
-        .panel-body.text-muted
-          =t 'messages.no_item', item: Record.model_name.human
+        .panel.panel-default
+          .panel-heading=t '.table'
+          - if records.present?
+            = render 'table', records: records
+          - else
+            .panel-body.text-muted
+              =t 'messages.no_item', item: Record.model_name.human

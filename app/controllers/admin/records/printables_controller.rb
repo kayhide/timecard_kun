@@ -1,4 +1,5 @@
 class Admin::Records::PrintablesController < AdminController
+  layout 'printable'
   before_action :set_cour
 
   # GET /admin/records/printables

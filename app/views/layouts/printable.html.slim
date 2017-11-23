@@ -1,0 +1,24 @@
+doctype html
+html
+  head
+    meta charset="utf-8"
+    meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"
+    meta name="viewport" content="width=device-width, initial-scale=1.0"
+    title=t 'header.site_title'
+    = csrf_meta_tags
+    = stylesheet_link_tag 'application', media: 'all'
+    = javascript_include_tag 'application'
+  body
+    nav.navbar.navbar-fixed-top.navbar-default
+      a.navbar-brand href=url_for(:root) =t 'header.site_title'
+      button.navbar-toggle.btn.btn-primary type="button" data-toggle="collapse" data-target=".navbar-collapse"
+        i.fa.fa-fw.fa-bars
+      .navbar-collapse.collapse
+        ul.nav.navbar-nav
+          li= link_to User.model_name.human, [:admin, :users]
+          li= link_to Record.model_name.human, [:admin, :records]
+          li= link_to [:admin, :records, :printables] do
+            i.fa.fa-print>
+            =t 'layout.records_printables'
+    .container-fluid
+      = yield
