@@ -11,3 +11,9 @@ table.table
   tr
     th=t '.over_working_hours'
     td.text-right= format_span(boy_to_eoc_gross_working_hours - boy_to_eoc_regular_working_hours)
+  tr
+    th=t '.working_days'
+    td.text-right= working_days
+  tr
+    th=t '.early_hours'
+    td.text-right= format_span early_hours

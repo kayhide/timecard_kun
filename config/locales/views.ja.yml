@@ -21,7 +21,7 @@ ja:
       printables:
         index:
           table: 明細
-          working_hours: 所定労働時間
+          working_hours: 労働時間
         table:
           sum: 合計
         working_hours:
@@ -29,3 +29,5 @@ ja:
           boy_to_eoc_regular_working_hours: 年初から締日までの所定労働時間
           boy_to_eoc_gross_working_hours: 年初から締日までの合計労働時間
           over_working_hours: 超過労働時間
+          working_days: 勤務日数
+          early_hours: 早朝時間
