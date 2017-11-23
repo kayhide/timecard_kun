@@ -1,7 +1,9 @@
 module RecordSpanCalculator
   extend ActiveSupport::Concern
 
-  SPLIT_POINT_OFFSET = 8.hours
+  EARLY_START_OFFSET = 4.hours
+  EARLY_ENDING_OFFSET = 7.hours + 45.minutes
+  EARLY_END_OFFSET = 8.hours
   BREAK_TIME_THREASHOLD = 6.hours
   BREAK_TIME_SPAN = 1.hours
 
@@ -33,11 +35,15 @@ module RecordSpanCalculator
     if started_at_changed? || finished_at_changed?
       if finished_at
         spans = Enumerator.new do |y|
-          x = started_at
-          while x < finished_at
-            x1 = [finished_at, x.beginning_of_day + SPLIT_POINT_OFFSET].min
-            y << [0, x1 - x].max
-            x = x.beginning_of_day + 1.day
+          d = started_at.beginning_of_day
+          while d < finished_at
+            r = [d + EARLY_START_OFFSET, d + EARLY_END_OFFSET]
+            t0 = [started_at, r.first].max
+            t1 = [finished_at, r.last].min
+            if t0 < d + EARLY_ENDING_OFFSET && t0 < t1
+              y << t1 - t0
+            end
+            d += 1.day
           end
         end
         self.early_span = spans.sum
