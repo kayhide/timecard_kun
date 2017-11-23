@@ -12,15 +12,30 @@ RSpec.describe Admin::Records::PrintablesController, type: :controller do
       Timecop.return
     end
 
-    it "assigns records of given cour" do
-      FactoryGirl.create(:record, started_at: '2016-03-20 23:59:59')
-      records = [
-        FactoryGirl.create(:record, started_at: '2016-03-21 00:00:00'),
-        FactoryGirl.create(:record, started_at: '2016-04-20 23:59:59')
-      ]
-      FactoryGirl.create(:record, started_at: '2016-04-21 00:00:00')
+    it "assigns records of given cour grouped by user" do
+      users = FactoryGirl.create_list(:user, 2)
+      records = []
+      users[0].tap do |user|
+        FactoryGirl.create(:record, user: user, started_at: '2016-03-20 23:59:59')
+        records << [
+          FactoryGirl.create(:record, user: user, started_at: '2016-03-21 00:00:00'),
+          FactoryGirl.create(:record, user: user, started_at: '2016-04-20 23:59:59')
+        ]
+        FactoryGirl.create(:record, user: user, started_at: '2016-04-21 00:00:00')
+      end
+      users[1].tap do |user|
+        FactoryGirl.create(:record, user: user, started_at: '2016-03-20 23:59:59')
+        records << [
+          FactoryGirl.create(:record, user: user, started_at: '2016-03-21 08:05:20'),
+        ]
+        FactoryGirl.create(:record, user: user, started_at: '2016-04-21 00:00:00')
+      end
       get :index, params: { year: '2016', month: '3' }
-      expect(assigns(:records)).to eq records
+      expect(assigns(:records))
+        .to eq({
+                 users[0].id => records[0],
+                 users[1].id => records[1]
+               })
     end
 
     it "assigns sums of regular_span from beginning of year to end of cour" do
