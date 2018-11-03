@@ -49,7 +49,6 @@ end
 
 group :development do
   gem 'web-console', '>= 3.3.0'
-  gem 'rails-footnotes'
 end
 
 group :test do
