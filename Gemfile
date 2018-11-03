@@ -35,7 +35,7 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'pry-stack_explorer'
   gem 'dotenv-rails'
-  gem 'factory_girl_rails'
+  gem 'factory_bot_rails'
 
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'spring'

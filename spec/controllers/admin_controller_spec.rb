@@ -37,7 +37,7 @@ RSpec.describe Admin::UsersController, type: :controller do
   describe "GET #show" do
     let(:action) { :show }
     let(:params) { { id: user.id } }
-    let(:user) { FactoryGirl.create(:user) }
+    let(:user) { FactoryBot.create(:user) }
     it_behaves_like AdminController
   end
 end

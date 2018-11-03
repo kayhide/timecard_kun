@@ -40,6 +40,6 @@ RSpec.shared_examples RecordDatelessHandler do
 end
 
 RSpec.describe Record, type: :model do
-  let(:record) { FactoryGirl.create(:record, started_at: '2017-09-25 08:03:26') }
+  let(:record) { FactoryBot.create(:record, started_at: '2017-09-25 08:03:26') }
   it_behaves_like RecordDatelessHandler
 end

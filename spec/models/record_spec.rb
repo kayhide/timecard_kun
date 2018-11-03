@@ -21,10 +21,10 @@ RSpec.describe Record, type: :model do
   describe '.cour' do
     it 'selects by started_at' do
       range = Time.zone.local(2017, 8, 21) ... Time.zone.local(2017, 9, 21)
-      FactoryGirl.create(:record, started_at: Time.new(2017, 8, 20))
+      FactoryBot.create(:record, started_at: Time.new(2017, 8, 20))
       records = [
-        FactoryGirl.create(:record, started_at: Time.new(2017, 8, 21)),
-        FactoryGirl.create(:record, started_at: Time.new(2017, 9, 20))
+        FactoryBot.create(:record, started_at: Time.new(2017, 8, 21)),
+        FactoryBot.create(:record, started_at: Time.new(2017, 9, 20))
       ]
       expect(Record.cour(range).sort).to eq records
     end
@@ -63,27 +63,27 @@ RSpec.describe Record, type: :model do
 
     it 'selects by started_at of after 2:00 today' do
       Timecop.freeze(Time.zone.parse('2017-09-20 10:00:00'))
-      FactoryGirl.create(:record, started_at: Time.zone.parse('2017-09-20 01:59:59'))
+      FactoryBot.create(:record, started_at: Time.zone.parse('2017-09-20 01:59:59'))
       records = [
-        FactoryGirl.create(:record, started_at: Time.zone.parse('2017-09-20 02:00:00')),
-        FactoryGirl.create(:record, started_at: Time.zone.parse('2017-09-20 10:00:00'))
+        FactoryBot.create(:record, started_at: Time.zone.parse('2017-09-20 02:00:00')),
+        FactoryBot.create(:record, started_at: Time.zone.parse('2017-09-20 10:00:00'))
       ]
       expect(Record.recent).to eq records
     end
 
     it 'takes last day when current time is before 2:00' do
       Timecop.freeze(Time.zone.parse('2017-09-20 01:59:59'))
-      FactoryGirl.create(:record, started_at: Time.zone.parse('2017-09-19 01:59:59'))
+      FactoryBot.create(:record, started_at: Time.zone.parse('2017-09-19 01:59:59'))
       records = [
-        FactoryGirl.create(:record, started_at: Time.zone.parse('2017-09-19 02:00:00')),
-        FactoryGirl.create(:record, started_at: Time.zone.parse('2017-09-20 01:59:59'))
+        FactoryBot.create(:record, started_at: Time.zone.parse('2017-09-19 02:00:00')),
+        FactoryBot.create(:record, started_at: Time.zone.parse('2017-09-20 01:59:59'))
       ]
       expect(Record.recent).to eq records
     end
   end
 
   describe '#computed_started_at' do
-    let(:record) { FactoryGirl.build(:record, :without_user) }
+    let(:record) { FactoryBot.build(:record, :without_user) }
     let(:today) { Date.new(2017, 9, 25) }
 
     before do

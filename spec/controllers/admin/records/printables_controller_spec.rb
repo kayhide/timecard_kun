@@ -13,22 +13,22 @@ RSpec.describe Admin::Records::PrintablesController, type: :controller do
     end
 
     it "assigns records of given cour grouped by user" do
-      users = FactoryGirl.create_list(:user, 2)
+      users = FactoryBot.create_list(:user, 2)
       records = []
       users[0].tap do |user|
-        FactoryGirl.create(:record, user: user, started_at: '2016-03-20 23:59:59')
+        FactoryBot.create(:record, user: user, started_at: '2016-03-20 23:59:59')
         records << [
-          FactoryGirl.create(:record, user: user, started_at: '2016-03-21 00:00:00'),
-          FactoryGirl.create(:record, user: user, started_at: '2016-04-20 23:59:59')
+          FactoryBot.create(:record, user: user, started_at: '2016-03-21 00:00:00'),
+          FactoryBot.create(:record, user: user, started_at: '2016-04-20 23:59:59')
         ]
-        FactoryGirl.create(:record, user: user, started_at: '2016-04-21 00:00:00')
+        FactoryBot.create(:record, user: user, started_at: '2016-04-21 00:00:00')
       end
       users[1].tap do |user|
-        FactoryGirl.create(:record, user: user, started_at: '2016-03-20 23:59:59')
+        FactoryBot.create(:record, user: user, started_at: '2016-03-20 23:59:59')
         records << [
-          FactoryGirl.create(:record, user: user, started_at: '2016-03-21 08:05:20'),
+          FactoryBot.create(:record, user: user, started_at: '2016-03-21 08:05:20'),
         ]
-        FactoryGirl.create(:record, user: user, started_at: '2016-04-21 00:00:00')
+        FactoryBot.create(:record, user: user, started_at: '2016-04-21 00:00:00')
       end
       get :index, params: { year: '2016', month: '3' }
       expect(assigns(:records))
@@ -39,13 +39,13 @@ RSpec.describe Admin::Records::PrintablesController, type: :controller do
     end
 
     it "assigns sums of regular_span from beginning of year to end of cour" do
-      users = FactoryGirl.create_list(:user, 2)
+      users = FactoryBot.create_list(:user, 2)
       users[0].tap do |user|
-        FactoryGirl.create(:record, user: user, started_at: nil, finished_at: '2016-01-01 17:00:00')
-        FactoryGirl.create(:record, user: user, started_at: nil, finished_at: '2016-04-20 17:00:00')
+        FactoryBot.create(:record, user: user, started_at: nil, finished_at: '2016-01-01 17:00:00')
+        FactoryBot.create(:record, user: user, started_at: nil, finished_at: '2016-04-20 17:00:00')
       end
       users[1].tap do |user|
-        FactoryGirl.create(:record, user: user, started_at: nil, finished_at: '2016-04-20 23:59:59')
+        FactoryBot.create(:record, user: user, started_at: nil, finished_at: '2016-04-20 23:59:59')
       end
       get :index, params: { year: '2016', month: '3' }
       expect(assigns(:boy_to_eoc_regular_span_sums))
@@ -56,9 +56,9 @@ RSpec.describe Admin::Records::PrintablesController, type: :controller do
     end
 
     it "assigns sums of regular_span without time range" do
-      user = FactoryGirl.create(:user)
-      FactoryGirl.create(:record, user: user, started_at: nil, finished_at: '2015-12-31 17:00:00')
-      FactoryGirl.create(:record, user: user, started_at: nil, finished_at: '2016-04-21 17:00:00')
+      user = FactoryBot.create(:user)
+      FactoryBot.create(:record, user: user, started_at: nil, finished_at: '2015-12-31 17:00:00')
+      FactoryBot.create(:record, user: user, started_at: nil, finished_at: '2016-04-21 17:00:00')
       get :index, params: { year: '2016', month: '3' }
       expect(assigns(:boy_to_eoc_regular_span_sums)).to eq({})
     end

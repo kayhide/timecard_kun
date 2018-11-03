@@ -26,7 +26,7 @@ module TimecardKun
 
     config.generators do |g|
       g.orm :active_record
-      g.test_framework :rspec, fixture: true, fixture_replacement: :factory_girl
+      g.test_framework :rspec, fixture: true, fixture_replacement: :factory_bot
       g.view_specs false
       g.routing_specs false
       g.helper_specs false

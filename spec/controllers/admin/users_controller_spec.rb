@@ -12,7 +12,7 @@ RSpec.describe Admin::UsersController, type: :controller do
 
   describe "GET #index" do
     it "returns a success response" do
-      user = FactoryGirl.create(:user)
+      user = FactoryBot.create(:user)
       get :index, params: {}, session: valid_session
       expect(response).to be_success
     end
@@ -20,7 +20,7 @@ RSpec.describe Admin::UsersController, type: :controller do
 
   describe "GET #show" do
     it "returns a success response" do
-      user = FactoryGirl.create(:user)
+      user = FactoryBot.create(:user)
       get :show, params: {id: user.to_param}, session: valid_session
       expect(response).to be_success
     end
@@ -35,7 +35,7 @@ RSpec.describe Admin::UsersController, type: :controller do
 
   describe "GET #edit" do
     it "returns a success response" do
-      user = FactoryGirl.create(:user)
+      user = FactoryBot.create(:user)
       get :edit, params: {id: user.to_param}, session: valid_session
       expect(response).to be_success
     end
@@ -78,14 +78,14 @@ RSpec.describe Admin::UsersController, type: :controller do
       }
 
       it "updates the requested user" do
-        user = FactoryGirl.create(:user)
+        user = FactoryBot.create(:user)
         put :update, params: {id: user.to_param, user: new_attributes}, session: valid_session
         user.reload
         expect(user.name).to eq 'Suzuki Ichiro'
       end
 
       it "redirects to the users list" do
-        user = FactoryGirl.create(:user)
+        user = FactoryBot.create(:user)
         put :update, params: {id: user.to_param, user: new_attributes}, session: valid_session
         expect(response).to redirect_to([:admin, :users])
       end
@@ -93,7 +93,7 @@ RSpec.describe Admin::UsersController, type: :controller do
 
     context "with invalid params" do
       it "returns a success response (i.e. to display the 'edit' template)" do
-        user = FactoryGirl.create(:user)
+        user = FactoryBot.create(:user)
         put :update, params: {id: user.to_param, user: invalid_attributes}, session: valid_session
         expect(response).to be_success
       end
@@ -102,14 +102,14 @@ RSpec.describe Admin::UsersController, type: :controller do
 
   describe "DELETE #destroy" do
     it "destroys the requested user" do
-      user = FactoryGirl.create(:user)
+      user = FactoryBot.create(:user)
       expect {
         delete :destroy, params: {id: user.to_param}, session: valid_session
       }.to change(User, :count).by(-1)
     end
 
     it "redirects to the users list" do
-      user = FactoryGirl.create(:user)
+      user = FactoryBot.create(:user)
       delete :destroy, params: {id: user.to_param}, session: valid_session
       expect(response).to redirect_to([:admin, :users])
     end

@@ -57,6 +57,6 @@ RSpec.shared_examples RecordStartSetter do
 end
 
 RSpec.describe Record, type: :model do
-  let(:record) { FactoryGirl.create(:record) }
+  let(:record) { FactoryBot.create(:record) }
   it_behaves_like RecordStartSetter
 end

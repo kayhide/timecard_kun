@@ -20,22 +20,22 @@ RSpec.describe Admin::RecordsController, type: :controller do
     end
 
     it "assigns records" do
-      records = FactoryGirl.create_list(:record, 2, started_at: Time.current)
+      records = FactoryBot.create_list(:record, 2, started_at: Time.current)
       get :index, params: {}
       expect(assigns(:records)).to eq records
     end
 
     it 'filters if :user_id is given' do
-      user = FactoryGirl.create(:user)
-      records = FactoryGirl.create_list(:record, 2, user: user, started_at: Time.current)
-      FactoryGirl.create(:record, started_at: Time.current)
+      user = FactoryBot.create(:user)
+      records = FactoryBot.create_list(:record, 2, user: user, started_at: Time.current)
+      FactoryBot.create(:record, started_at: Time.current)
       get :index, params: { user_id: user.id }
       expect(assigns(:records)).to eq records
     end
   end
 
   describe "POST #create.js" do
-    let(:user) { FactoryGirl.create(:user) }
+    let(:user) { FactoryBot.create(:user) }
     let(:valid_attributes) {
       {
         user_id: user.id
@@ -77,7 +77,7 @@ RSpec.describe Admin::RecordsController, type: :controller do
   end
 
   describe "PATCH #update.js" do
-    let!(:record) { FactoryGirl.create(:record) }
+    let!(:record) { FactoryBot.create(:record) }
 
     context "with valid params" do
       let(:new_attributes) {
@@ -104,7 +104,7 @@ RSpec.describe Admin::RecordsController, type: :controller do
   end
 
   describe "DELETE #destroy" do
-    let!(:record) { FactoryGirl.create(:record) }
+    let!(:record) { FactoryBot.create(:record) }
 
     it "destroys the requested record" do
       expect {

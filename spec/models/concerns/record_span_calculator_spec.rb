@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.shared_examples RecordSpanCalculator do
-  let(:record) { FactoryGirl.build(:record) }
+  let(:record) { FactoryBot.build(:record) }
   let(:today) { Date.new(2017, 9, 25) }
 
   before do

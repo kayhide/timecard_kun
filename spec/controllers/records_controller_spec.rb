@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe RecordsController, type: :controller do
-  let(:user) { FactoryGirl.create(:user) }
+  let(:user) { FactoryBot.create(:user) }
 
   describe 'POST #start' do
     it 'creates new record' do

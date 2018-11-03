@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Admin::Users::HiddenController, type: :controller do
   describe 'POST #create' do
     it 'sets hidden true' do
-      user = FactoryGirl.create(:user)
+      user = FactoryBot.create(:user)
       expect {
         put :create, params: {id: user.to_param}, format: :js
       }.to change{ user.reload.hidden? }.from(false).to(true)
@@ -12,7 +12,7 @@ RSpec.describe Admin::Users::HiddenController, type: :controller do
 
   describe 'DELETE #destroy' do
     it 'sets hidden false' do
-      user = FactoryGirl.create(:user, hidden: true)
+      user = FactoryBot.create(:user, hidden: true)
       expect {
         delete :destroy, params: {id: user.to_param}, format: :js
       }.to change{ user.reload.hidden? }.from(true).to(false)
