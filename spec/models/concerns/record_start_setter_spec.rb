@@ -4,12 +4,10 @@ RSpec.shared_examples RecordStartSetter do
   let(:today) { Date.new(2017, 9, 25) }
 
   describe '#ensure_started_at' do
-    before do
-      Timecop.freeze today
-    end
-
-    after do
-      Timecop.return
+    around do |e|
+      travel_to today do
+        e.run
+      end
     end
 
     it 'set 8:00 if started_at is absent' do

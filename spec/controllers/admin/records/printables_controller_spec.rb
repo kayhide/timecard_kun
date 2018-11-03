@@ -4,12 +4,10 @@ RSpec.describe Admin::Records::PrintablesController, type: :controller do
   let(:today) { Time.zone.parse('2017-10-03 19:19:41') }
 
   describe "GET #index" do
-    before do
-      Timecop.freeze today
-    end
-
-    after do
-      Timecop.return
+    around do |e|
+      travel_to today do
+        e.run
+      end
     end
 
     it "assigns records of given cour grouped by user" do

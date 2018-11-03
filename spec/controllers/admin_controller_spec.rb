@@ -4,12 +4,10 @@ RSpec.shared_examples_for AdminController do |args|
   let(:today) { Time.zone.parse('2017-10-03 19:19:41') }
 
   describe "#set_cour" do
-    before do
-      Timecop.freeze today
-    end
-
-    after do
-      Timecop.return
+    around do |e|
+      travel_to today do
+        e.run
+      end
     end
 
     it "assigns current cour" do

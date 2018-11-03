@@ -8,6 +8,8 @@ require 'rspec/rails'
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
+  config.include ActiveSupport::Testing::TimeHelpers
+
   config.filter_run focus: true
   config.run_all_when_everything_filtered = true
 

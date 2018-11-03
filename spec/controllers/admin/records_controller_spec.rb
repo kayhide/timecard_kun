@@ -11,12 +11,10 @@ RSpec.describe Admin::RecordsController, type: :controller do
   describe "GET #index" do
     let(:today) { Time.zone.parse('2017-11-04 16:49:12') }
 
-    before do
-      Timecop.freeze today
-    end
-
-    after do
-      Timecop.return
+    around do |e|
+      travel_to today do
+        e.run
+      end
     end
 
     it "assigns records" do

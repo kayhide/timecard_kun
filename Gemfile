@@ -53,7 +53,6 @@ end
 
 group :test do
   gem 'rails-controller-testing'
-  gem 'timecop'
 end
 
 group :production do

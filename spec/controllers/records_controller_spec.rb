@@ -14,12 +14,11 @@ RSpec.describe RecordsController, type: :controller do
   describe 'POST #finish' do
     let(:started_at) { Time.zone.parse('2017-09-25 07:58:49') }
     let(:finished_at) { Time.zone.parse('2017-09-25 18:01:23') }
-    before do
-      Timecop.freeze(finished_at)
-    end
 
-    after do
-      Timecop.return
+    around do |e|
+      travel_to finished_at do
+        e.run
+      end
     end
 
     it 'finishes existing record' do

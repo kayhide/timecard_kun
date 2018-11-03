@@ -4,12 +4,10 @@ RSpec.shared_examples RecordSpanCalculator do
   let(:record) { FactoryBot.build(:record) }
   let(:today) { Date.new(2017, 9, 25) }
 
-  before do
-    Timecop.freeze today
-  end
-
-  after do
-    Timecop.return
+  around do |e|
+    travel_to today do
+      e.run
+    end
   end
 
   describe '#ensure_regular_span' do

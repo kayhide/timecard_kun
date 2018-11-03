@@ -5,12 +5,10 @@ RSpec.shared_examples RecordDatelessHandler do
   let(:today) { Date.new(2017, 10, 3) }
 
   describe '#handle_dateless' do
-    before do
-      Timecop.freeze today
-    end
-
-    after do
-      Timecop.return
+    around do |e|
+      travel_to today do
+        e.run
+      end
     end
 
     it 'sets started_at and finished_at with original started_at date' do
