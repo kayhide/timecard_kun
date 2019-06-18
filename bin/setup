@@ -18,16 +18,21 @@ chdir APP_ROOT do
   system! 'gem install bundler --conservative'
   system('bundle check') || system!('bundle install')
 
-  # Install JavaScript dependencies if using Yarn
-  # system('bin/yarn')
-
-
-  # puts "\n== Copying sample files =="
-  # unless File.exist?('config/database.yml')
-  #   cp 'config/database.yml.sample', 'config/database.yml'
-  # end
 
   puts "\n== Preparing database =="
+  system! 'docker-compose up -d'
+  db_container = `docker-compose ps -q db`
+  db_port = `docker port #{db_container}`.split(':').last
+  open('.envrc', "a") do |io|
+    io.puts
+    io.puts "export PGHOST=localhost"
+    io.puts "export PGUSER=postgres"
+    io.puts "export PGPORT=#{db_port}"
+  end
+
+  ENV["PGHOST"] = "localhost"
+  ENV["PGUSER"] = "postgres"
+  ENV["PGPORT"] = db_port
   system! 'bin/rails db:setup'
 
   puts "\n== Removing old logs and tempfiles =="
