@@ -1,4 +1,5 @@
 .env
+.powenv
 
 # Ignore bundler config.
 /.bundle
