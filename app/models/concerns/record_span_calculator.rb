@@ -1,7 +1,7 @@
 module RecordSpanCalculator
   extend ActiveSupport::Concern
 
-  EARLY_START_OFFSET = 4.hours
+  EARLY_START_OFFSET = 5.hours
   EARLY_ENDING_OFFSET = 7.hours + 45.minutes
   EARLY_END_OFFSET = 8.hours
   BREAK_TIME_THREASHOLD = 6.hours

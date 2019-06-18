@@ -44,8 +44,8 @@ RSpec.shared_examples RecordSpanCalculator do
 
   describe '#ensure_early_span' do
     it 'sets span' do
-      record.started_at = Time.zone.parse('04:00')
-      record.finished_at = Time.zone.parse('05:23')
+      record.started_at = Time.zone.parse('05:00')
+      record.finished_at = Time.zone.parse('06:23')
       record.save
       expect(record.early_span).to eq 1.hours + 23.minutes
     end
@@ -57,9 +57,9 @@ RSpec.shared_examples RecordSpanCalculator do
       expect(record.early_span).to eq 2.hours
     end
 
-    it 'drops before 4:00' do
+    it 'drops before 5:00' do
       record.started_at = Time.zone.parse('03:00')
-      record.finished_at = Time.zone.parse('05:00')
+      record.finished_at = Time.zone.parse('06:00')
       record.save
       expect(record.early_span).to eq 1.hours
     end
@@ -71,11 +71,11 @@ RSpec.shared_examples RecordSpanCalculator do
       expect(record.early_span).to eq 0.hours
     end
 
-    it 'takes from 4:00 to 8:00 when crossing multiple days' do
+    it 'takes from 5:00 to 8:00 when crossing multiple days' do
       record.started_at = Time.zone.parse('23:00') - 3.day
       record.finished_at = Time.zone.parse('10:00')
       record.save
-      expect(record.early_span).to eq 12.hours
+      expect(record.early_span).to eq 9.hours
     end
 
     it 'sets nil if finished_at is abasent' do
