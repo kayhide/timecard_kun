@@ -4,12 +4,15 @@ module RecordSpanCalculator
   EARLY_START_OFFSET = 5.hours
   EARLY_ENDING_OFFSET = 7.hours + 45.minutes
   EARLY_END_OFFSET = 8.hours
+  LATE_START_OFFSET = 22.hours
+  LATE_END_OFFSET = 29.hours
   BREAK_TIME_THREASHOLD = 6.hours
   BREAK_TIME_SPAN = 1.hours
 
   included do
     before_validation :ensure_regular_span
     before_validation :ensure_early_span
+    before_validation :ensure_late_span
   end
 
   private
@@ -49,6 +52,28 @@ module RecordSpanCalculator
         self.early_span = spans.sum
       else
         self.early_span = nil
+      end
+    end
+  end
+
+  def ensure_late_span
+    if started_at_changed? || finished_at_changed?
+      if finished_at
+        spans = Enumerator.new do |y|
+          d = started_at.beginning_of_day - 1.day
+          while d < finished_at
+            r = [d + LATE_START_OFFSET, d + LATE_END_OFFSET]
+            t0 = [started_at, r.first].max
+            t1 = [finished_at, r.last].min
+            if t0 < t1
+              y << t1 - t0
+            end
+            d += 1.day
+          end
+        end
+        self.late_span = spans.sum
+      else
+        self.late_span = nil
       end
     end
   end
