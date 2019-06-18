@@ -28,6 +28,7 @@
             th 退社時刻
             th 勤務時間
             th 早朝時間
+            th 深夜時間
         tbody
           - records.each do |record|
             tr
@@ -35,3 +36,4 @@
               td= record.ended_at
               td= record.regular_span
               td= record.early_span
+              td= record.late_span

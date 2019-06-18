@@ -7,6 +7,7 @@ table#records.table.table-striped
       th.col-sm-2= Record.human_attribute_name :finished_at
       th.col-sm-2= Record.human_attribute_name :regular_span
       th.col-sm-2= Record.human_attribute_name :early_span
+      th.col-sm-2= Record.human_attribute_name :late_span
       th.col-sm-1
   tbody
     - records.each do |record|

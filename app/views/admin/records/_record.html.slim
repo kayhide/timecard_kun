@@ -12,6 +12,7 @@ tr id=dom_id(record)
       = record.finished_at && l(record.finished_at, format: :time_only)
   td= record.regular_span && format_span(record.regular_span)
   td= record.early_span && format_span(record.early_span)
+  td= record.late_span && format_span(record.late_span)
   td
     .editable-following style="display:none"
       = link_to [:admin, record], remote: true, method: :delete, class: %(text-danger) do

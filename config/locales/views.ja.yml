@@ -32,3 +32,5 @@ ja:
           working_days: 勤務日数
           early_hours: 早朝勤務時間
           early_payment: 早朝勤務手当
+          late_hours: 深夜勤務時間
+          late_payment: 深夜勤務手当

@@ -6,6 +6,7 @@ table.table.table-striped
       th.col-sm-2= Record.human_attribute_name :finished_at
       th.col-sm-2= Record.human_attribute_name :regular_span
       th.col-sm-2= Record.human_attribute_name :early_span
+      th.col-sm-2= Record.human_attribute_name :late_span
   tbody
     - records.each do |record|
       tr
@@ -14,6 +15,7 @@ table.table.table-striped
         td= record.finished_at && l(record.finished_at, format: :time_only)
         td= record.regular_span && format_span(record.regular_span)
         td= record.early_span && format_span(record.early_span)
+        td= record.late_span && format_span(record.late_span)
   tfoot
     tr
       th=t '.sum'
@@ -21,3 +23,4 @@ table.table.table-striped
       th
       th= format_span records.map(&:regular_span).compact.sum
       th= format_span records.map(&:early_span).compact.sum
+      th= format_span records.map(&:late_span).compact.sum
