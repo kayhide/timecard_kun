@@ -36,7 +36,7 @@ group :development, :test do
   gem 'pry-doc'
   gem 'pry-stack_explorer'
   gem 'rack-livereload'
-  gem 'rspec-rails'
+  gem 'rspec-rails', '~> 4.0.0.beta2'
   gem 'selenium-webdriver'
   gem 'spring'
   gem 'spring-commands-rspec'
