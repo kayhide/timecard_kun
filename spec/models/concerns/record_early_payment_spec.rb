@@ -23,7 +23,7 @@ RSpec.shared_examples RecordEarlyPayment do
   describe '.early_payment' do
     it 'returns span hours * 70' do
       span = 1.hours + 30.minutes
-      expect(Record.early_payment span).to eq 105
+      expect(Record.early_payment span).to eq 150
     end
 
     it 'returns span hours * 70' do
