@@ -4,13 +4,13 @@ COMPOSE_COMMAND := docker-compose
 
 
 guard:
-	@eval "$(shell $(MAKE) envs)" && bundle exec guard
+	@eval "$(MAKE) envs" && bundle exec guard
 .PHONY: guard
 
 infra-up:
 	${COMPOSE_COMMAND} up -d
 	@bundle exec spring stop
-	@eval "$(shell $(MAKE) envs)" && rails db:setup || rails db:migrate
+	@eval "$(MAKE) envs" && rails db:setup || rails db:migrate
 .PHONY: infra-up
 
 infra-down:
@@ -22,11 +22,10 @@ rails-update:
 	@eval "$(shell $(MAKE) envs)" && bin/update
 .PHONY: rails-update
 
-DB_CONTAINER := $(shell docker ps -q --filter 'name=${COMPOSE_PROJECT_NAME}_db_*')
-DB_PORT := $(shell docker port ${DB_CONTAINER} | cut -d ':' -f 2)
+envs: DB_PORT = $(shell docker inspect $(COMPOSE_PROJECT_NAME)-db-1 | jq -r '.[].NetworkSettings.Ports."5432/tcp"[-1].HostPort')
 envs:
 	@echo "export DB_PORT=${DB_PORT}"
-.PHONY: env
+.PHONY: envs
 
 rails-console:
 	@eval "$(shell $(MAKE) envs)" && rails console
