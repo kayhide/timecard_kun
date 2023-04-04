@@ -1,12 +1,8 @@
 source 'https://rubygems.org'
+git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-git_source(:github) do |repo_name|
-  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
-  "https://github.com/#{repo_name}.git"
-end
-
-ruby '2.6.4'
-gem 'rails', '~> 6.0.0'
+ruby '3.1.2'
+gem 'rails', '~> 6.1.0'
 
 gem 'bootstrap-datepicker-rails'
 gem 'bootstrap-editable-rails'
