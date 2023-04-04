@@ -20,6 +20,9 @@ gem 'sassc-rails'
 gem 'slim-rails'
 gem 'uglifier', '>= 1.3.0'
 
+# 4.x causes error when `rake assets:precompile`
+gem 'sprockets', '~> 3.7'
+
 group :development, :test do
   gem 'byebug'
   gem 'capybara', '~> 2.13'
